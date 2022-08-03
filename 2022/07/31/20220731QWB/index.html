@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/maomao.png">
+  <link rel="icon" href="/img/maomao.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="k3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="谍影重重0x01 VMESS流量分析config.json 结合“境外”发现v2ray官方文档内包含默认id信息,TCP数据加密,可以猜测是v2ray使用的vmess协议 1234567&quot;settings&quot;: &amp;#123;                &quot;clients&quot;: [                    &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022-强网杯-Misc-部分Wp">
+<meta property="og:url" content="https://www.imfengyuan.info/2022/07/31/20220731QWB/index.html">
+<meta property="og:site_name" content="imK3">
+<meta property="og:description" content="谍影重重0x01 VMESS流量分析config.json 结合“境外”发现v2ray官方文档内包含默认id信息,TCP数据加密,可以猜测是v2ray使用的vmess协议 1234567&quot;settings&quot;: &amp;#123;                &quot;clients&quot;: [                    &amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%201.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%202.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%203.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%204.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%205.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%206.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%207.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%208.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%209.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%2010.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%2011.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled%2012.png">
+<meta property="article:published_time" content="2022-07-31T22:19:23.000Z">
+<meta property="article:modified_time" content="2022-07-31T22:20:23.000Z">
+<meta property="article:author" content="imfengyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.imfengyuan.info/imgs/20220731/Untitled.png">
+  
+  
+  <title>2022-强网杯-Misc-部分Wp - imK3</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.imfengyuan.info","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="imK3" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>K3&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/mao.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2022-强网杯-Misc-部分Wp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-31 22:19" pubdate>
+          2022年7月31日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          18k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          150 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2022-强网杯-Misc-部分Wp</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年7月31日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="谍影重重"><a href="#谍影重重" class="headerlink" title="谍影重重"></a>谍影重重</h1><h2 id="0x01-VMESS流量分析"><a href="#0x01-VMESS流量分析" class="headerlink" title="0x01 VMESS流量分析"></a>0x01 VMESS流量分析</h2><p>config.json 结合“境外”发现v2ray官方文档内包含默认id信息,TCP数据加密,可以猜测是v2ray使用的vmess协议</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-string">&quot;settings&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;clients&quot;</span>: [<br>                    &#123;<br>                        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;</span><br>                    &#125;<br>                ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>握手信息:客户端(37886 ) → 服务端(10087)</p>
+<p><img src="/../imgs/20220731/Untitled.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>首先分析第一个314字节的包</p>
+<p><img src="/../imgs/20220731/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>服务端必然存在解析 <strong>解析客户端发送的请求</strong>的相关代码 [目标: 修改源码为我所用]</p>
+<blockquote>
+<p>这是一次没有工具一波梭的流量分析, 只能利用源码为工具</p>
+</blockquote>
+<ol>
+<li><p>服务端先从包中获取16字节的Auth验证信息</p>
+<p>代码位置: <a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L128">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L128</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">if</span> _, err := buffer.<span class="hljs-title class_">ReadFullFrom</span>(reader, protocol.<span class="hljs-property">IDBytesLen</span>); err != nil &#123;<br>		<span class="hljs-keyword">return</span> nil, <span class="hljs-title function_">newError</span>(<span class="hljs-string">&quot;failed to read request header&quot;</span>).<span class="hljs-title class_">Base</span>(err)<br>	&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>验证用户,这里直接使用官方文档里给出</p>
+<p><img src="/../imgs/20220731/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>具体对应源码见:<a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/validator.go#L130">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/validator.go#L130</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">//这里有一个简约版的代码项目,只有客户端部分,编码非常容易读懂 https://github.com/gitsrc/vmess-client</span><br><span class="hljs-comment">//以及提供了很好的便捷代码</span><br>func (c *<span class="hljs-title class_">Conn</span>) <span class="hljs-title class_">EncodeAuthInfo</span>() []byte &#123;<br>	ts := <span class="hljs-title function_">make</span>([]byte, <span class="hljs-number">8</span>)<br><span class="hljs-comment">//这个人写的时候为了方便,并没有随机选择秒数,但是我们根据官方源码还是需要爆破时间戳</span><br>	binary.<span class="hljs-property">BigEndian</span>.<span class="hljs-title class_">PutUint64</span>(ts, <span class="hljs-title function_">uint64</span>(time.<span class="hljs-title class_">Now</span>().<span class="hljs-title function_">UTC</span>().<span class="hljs-title class_">Unix</span>())) <br>	h := hmac.<span class="hljs-title class_">New</span>(md5.<span class="hljs-property">New</span>, c.<span class="hljs-property">user</span>.<span class="hljs-property">UUID</span>[:])<br>	fmt.<span class="hljs-title class_">Printf</span>(<span class="hljs-string">&quot;uuid: %x \n&quot;</span>, c.<span class="hljs-property">user</span>.<span class="hljs-property">UUID</span>[:])<br>	h.<span class="hljs-title class_">Write</span>(ts)<br>	d := h.<span class="hljs-title class_">Sum</span>(nil)<br>	<span class="hljs-keyword">return</span> d<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>浅浅看一下源码就知道,后面加密都要用到<strong>时间戳,需要爆破</strong> </p>
+<p>题目提供了用户的UUID 和 HMAC的值, 流量包里的时间也有大概的时间,找出吻合的即可.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestBreakTimeStamp</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br>	<span class="hljs-comment">//K = 用户 ID (16 字节)</span><br>	<span class="hljs-keyword">var</span> uuid [<span class="hljs-number">16</span>]byte<br>	s := <span class="hljs-string">&quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;</span><br>	b := []<span class="hljs-title function_">byte</span>(strings.<span class="hljs-title class_">Replace</span>(s, <span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, -<span class="hljs-number">1</span>))<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(uuid[:], b)<br>	fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;uuiddd:&quot;</span>, uuid[:])<br><br>	<span class="hljs-comment">//HMAC 值</span><br>	h := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;4dd11f9b04f2b562b9db539d939f1d52&quot;</span>)<br>	<span class="hljs-keyword">var</span> hmacmd5 [<span class="hljs-number">16</span>]byte<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(hmacmd5[:], h)<br>	fmt.<span class="hljs-title class_">Println</span>(hmacmd5)<br><br>	<span class="hljs-comment">//M = UTC 时间，精确到秒，取值为当前时间的前后 30 秒随机值(8 字节, Big Endian)</span><br>	timestamp := <span class="hljs-number">1615528962</span><br>	<span class="hljs-keyword">for</span> i := -<span class="hljs-number">30</span>; i &lt;= <span class="hljs-number">30</span>; i++ &#123;<br>		<span class="hljs-keyword">var</span> b [<span class="hljs-number">8</span>]byte<br>		binary.<span class="hljs-property">BigEndian</span>.<span class="hljs-title class_">PutUint64</span>(b[:], <span class="hljs-title function_">uint64</span>(timestamp+i))<br>		mac := hmac.<span class="hljs-title class_">New</span>(md5.<span class="hljs-property">New</span>, uuid[:])<br>		mac.<span class="hljs-title class_">Write</span>(b[:])<br>		expectedMAC := mac.<span class="hljs-title class_">Sum</span>(nil)<br>		<span class="hljs-keyword">for</span> index, value := range expectedMAC &#123;<br>			<span class="hljs-keyword">if</span> hmacmd5[index] == value &#123;<br>				<span class="hljs-title function_">println</span>(timestamp+i, <span class="hljs-string">&quot;的Index=&quot;</span>, index, <span class="hljs-string">&quot;吻合&quot;</span>)<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-comment">//M = UTC 时间，精确到秒，取值为当前时间的前后 30 秒随机值(8 字节, Big Endian)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>爆破得到时间戳: 1615528982</p>
+</li>
+<li><p>解密指令部分,依旧是源码部分,非常清晰</p>
+<p>代码定位:<a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L137">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L137</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsx">iv := <span class="hljs-title function_">hashTimestamp</span>(md5.<span class="hljs-title class_">New</span>(), timestamp)<br>vmessAccount := user.<span class="hljs-property">Account</span>.(*vmess.<span class="hljs-property">MemoryAccount</span>)<br>aesStream := crypto.<span class="hljs-title class_">NewAesDecryptionStream</span>(vmessAccount.<span class="hljs-property">ID</span>.<span class="hljs-title class_">CmdKey</span>(), iv[:])<br>decryptor := crypto.<span class="hljs-title class_">NewCryptionReader</span>(aesStream, reader)<br></code></pre></td></tr></table></figure>
+
+<p>结合官方文档</p>
+<p><img src="/../imgs/20220731/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>解密代码参考:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodeRequestHeader</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br><br>	<span class="hljs-comment">//uuid解析</span><br>	<span class="hljs-keyword">var</span> uid [<span class="hljs-number">16</span>]byte<br>	s := <span class="hljs-string">&quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;</span><br>	b := []<span class="hljs-title function_">byte</span>(strings.<span class="hljs-title class_">Replace</span>(s, <span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, -<span class="hljs-number">1</span>))<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(uid[:], b)<br>	<span class="hljs-comment">//Key：MD5(用户 ID + []byte(&#x27;c48619fe-8f02-49e0-b9e9-edf763e17e21&#x27;))</span><br>	md5hash1 := md5.<span class="hljs-title class_">New</span>()<br>	md5hash1.<span class="hljs-title class_">Write</span>(uid[:])<br>	md5hash1.<span class="hljs-title class_">Write</span>([]<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;c48619fe-8f02-49e0-b9e9-edf763e17e21&quot;</span>))<br>	key := md5hash1.<span class="hljs-title class_">Sum</span>(nil)[:]<br>	<span class="hljs-comment">//IV：MD5(X + X + X + X)，X = []byte(认证信息生成的时间) (8 字节, Big Endian)</span><br>	md5hash := md5.<span class="hljs-title class_">New</span>()<br>	ts := <span class="hljs-title function_">make</span>([]byte, <span class="hljs-number">8</span>)<br>	binary.<span class="hljs-property">BigEndian</span>.<span class="hljs-title class_">PutUint64</span>(ts, <span class="hljs-title function_">uint64</span>(<span class="hljs-number">1615528982</span>))<br>	fmt.<span class="hljs-title class_">Println</span>(hex.<span class="hljs-title class_">EncodeToString</span>(ts[:]))<br>	md5hash.<span class="hljs-title class_">Write</span>(ts)<br>	md5hash.<span class="hljs-title class_">Write</span>(ts)<br>	md5hash.<span class="hljs-title class_">Write</span>(ts)<br>	md5hash.<span class="hljs-title class_">Write</span>(ts)<br>	iv := md5hash.<span class="hljs-title class_">Sum</span>(nil)<br><br>	block, _ := aes.<span class="hljs-title class_">NewCipher</span>(key)<br>	stream := cipher.<span class="hljs-title class_">NewCFBDecrypter</span>(block, iv)<br>	dat, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/4dd1.bin&quot;</span>) <span class="hljs-comment">//整个数据包</span><br>	buf := <span class="hljs-title function_">make</span>([]byte, <span class="hljs-title function_">len</span>(dat[<span class="hljs-number">16</span>:]))<br>	stream.<span class="hljs-title class_">XORKeyStream</span>(buf, dat[<span class="hljs-number">16</span>:])<br>	<span class="hljs-comment">//因为指令部分第一个版本号永远为1 如果版本号为：1</span><br>	<span class="hljs-keyword">if</span> buf[<span class="hljs-number">0</span>] == <span class="hljs-number">1</span> &#123;<br>		<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Congrats!&quot;</span>)<br>		fmt.<span class="hljs-title class_">Printf</span>(<span class="hljs-string">&quot; key : %x&quot;</span>, key)<br>		fmt.<span class="hljs-title class_">Printf</span>(<span class="hljs-string">&quot;iv : %x&quot;</span>, iv)<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n解密后结果：&quot;</span>, buf)<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n版本号：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n数据加密IV：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">1</span>:<span class="hljs-number">17</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n数据加密Key：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">17</span>:<span class="hljs-number">33</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n响应认证：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">33</span>:<span class="hljs-number">34</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n选项：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">34</span>:<span class="hljs-number">35</span>]))<br>		padingLen := <span class="hljs-title function_">int</span>(buf[<span class="hljs-number">3</span>] &gt;&gt; <span class="hljs-number">4</span>)<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\npading：&quot;</span>, padingLen)<br>		enc := buf[<span class="hljs-number">35</span>] &amp; <span class="hljs-number">0x0F</span><br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n加密方式enc：&quot;</span>, enc)<br><br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n保留：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">36</span>:<span class="hljs-number">37</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n指令：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">37</span>:<span class="hljs-number">38</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n端口：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">38</span>:<span class="hljs-number">40</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n地址类型：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">40</span>:<span class="hljs-number">41</span>]))<br>		<span class="hljs-comment">//ipv4</span><br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\n地址A：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">41</span>:<span class="hljs-number">45</span>]))<br>		<span class="hljs-comment">//根据padding确认为7长度</span><br>		<span class="hljs-comment">//余量 P：在校验值之前加入 P 字节的随机值；</span><br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\npadding：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">45</span>:<span class="hljs-number">52</span>]))<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;\nhash：&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(buf[<span class="hljs-number">52</span>:<span class="hljs-number">56</span>]))<br>	&#125;<br><br>	<span class="hljs-comment">// 指令部分key : b50d916ac0cec067981af8e5f38a758f  iv : 881eb47d4d3b67b24328c5178c0eedcc</span><br>	<span class="hljs-comment">// 指令请求头</span><br>	<span class="hljs-comment">//  数据加密key : 5e4a9aa9ba58c7e3ad36fe2499dca259</span><br>	<span class="hljs-comment">//  数据加密iv : 13277f5732da52ada790d87b8829daa9</span><br>	<span class="hljs-comment">// 响应认证：a2</span><br>	<span class="hljs-comment">// 加密方式enc: 3</span><br>	<span class="hljs-comment">// opt为0d 13 8+4+1 -&gt; 开启了三个模式,这里官方文档也没说....官方文档能不能让出题人更新一下...</span><br>  <span class="hljs-comment">// pading： 7随机值的长度</span><br>	<span class="hljs-comment">// 所以指令部分的长度应为: 56个字节 </span><br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="整理几个官方文档的说法不清晰的地方"><a href="#整理几个官方文档的说法不清晰的地方" class="headerlink" title="整理几个官方文档的说法不清晰的地方"></a>整理几个官方文档的说法不清晰的地方</h3><ol>
+<li>关于option上面的选项值的问题.</li>
+</ol>
+<p><img src="/../imgs/20220731/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<blockquote>
+<p>选项 ：</p>
+<ul>
+<li>S (0x01)：标准格式的数据流（建议开启）；</li>
+<li>R (0x02)：客户端期待重用 TCP 连接（V2Ray 2.23+ 弃用）；<ul>
+<li>只有当 S 开启时，这一项才有效；</li>
+</ul>
+</li>
+<li>M (0x04)：开启元数据混淆（建议开启）；<ul>
+<li>只有当 S 开启时，这一项才有效；</li>
+<li>当其项开启时，客户端和服务器端需要分别构造两个 Shake 实例，分别为 RequestMask &#x3D; Shake(请求数据 IV), ResponseMask &#x3D; Shake(响应数据 IV)。</li>
+</ul>
+</li>
+<li>X：保留</li>
+</ul>
+</blockquote>
+<p>因为我们这里通过解密得出<strong>Opt</strong>的值为<strong>0d</strong> &#x3D; 13 ,显然根据文档没有这个值, 回到源码</p>
+<p>发现这里新增了<strong>globalpadding</strong>模式 8 + 4 + 1 → 开启了三个模式 S M 和 GlobalPadding</p>
+<p>S → 表示<strong>客户端请求的数据部分</strong>  和 <strong>服务器端的响应部分的应答数据 都是 经过标准格式 (2字节长度 + 数据)</strong></p>
+<p>M → 元数据混淆模式 会增加一个 shake实例 (有兴趣和深入研究)</p>
+<p><img src="/../imgs/20220731/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>b. 关于padding和数据加密方式</p>
+<p>在通过对应官方文档解析过程中,发现完全不对应</p>
+<p>所以回到源码,而是共用了一个字节.具体操作也可看编码过程</p>
+<p>代码参见:<a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L166">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L166</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsx"> <br> request.<span class="hljs-property">Option</span> = bitmask.<span class="hljs-title class_">Byte</span>(buffer.<span class="hljs-title class_">Byte</span>(<span class="hljs-number">34</span>)) <span class="hljs-comment">// 1 byte</span><br> <span class="hljs-comment">//可以看到再取出Opt对应的字节之后, padingLen和Security都只用了Byte[35],这一个字节</span><br>padingLen := <span class="hljs-title function_">int</span>(buffer.<span class="hljs-title class_">Byte</span>(<span class="hljs-number">35</span>) &gt;&gt; <span class="hljs-number">4</span>)<br>request.<span class="hljs-property">Security</span> = <span class="hljs-title function_">parseSecurityType</span>(buffer.<span class="hljs-title class_">Byte</span>(<span class="hljs-number">35</span>) &amp; <span class="hljs-number">0x0F</span>)<br><span class="hljs-comment">// 1 bytes reserved</span><br>request.<span class="hljs-property">Command</span> = protocol.<span class="hljs-title class_">RequestCommand</span>(buffer.<span class="hljs-title class_">Byte</span>(<span class="hljs-number">37</span>))<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../imgs/20220731/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>更离谱的是,就算我们解析出来了是<strong>3</strong>,看上去可以和官方文档对应,</p>
+<p>如果你看到官方文档,以为我们的enc值是3 是ChacCha20那你就错了….还是得回到源码确认（幸亏看了一眼）</p>
+<blockquote>
+<p>加密方式：指定数据部分的加密方式，可选的值有：</p>
+<ul>
+<li>0x00：AES-128-CFB；</li>
+<li>0x01：不加密；</li>
+<li>0x02：AES-128-GCM；</li>
+<li>0x03：ChaCha20-Poly1305</li>
+</ul>
+</blockquote>
+<p>源码中的 3 对应了AES128 GCM (:)</p>
+<p><img src="/../imgs/20220731/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>所以数据部分仍旧是使用了AES-GCM进行加密</p>
+</li>
+<li><p>解密RequestBody数据部分</p>
+<p>解密RequestBody当然是服务端的事情.</p>
+<p>定位代码:<a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L212">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/server.go#L212</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">//我们根据指令部分的Opt,已知 ChunkMasking和PaddingLengthGenerator 全开</span><br><br><span class="hljs-comment">//一上来先是判断你开没开 ChunkMasking 我们这里开了 所以保留一下 </span><br><span class="hljs-comment">//当其项开启时，客户端和服务器端需要分别构造两个 Shake 实例，分别为 RequestMask = Shake(请求数据 IV), ResponseMask = Shake(响应数据 IV)。</span><br><br><span class="hljs-keyword">if</span> request.<span class="hljs-property">Option</span>.<span class="hljs-title class_">Has</span>(protocol.<span class="hljs-property">RequestOptionChunkMasking</span>) &#123;<br>	<span class="hljs-comment">//这边要注意它使用了 requestBodyIV [ 指令部分的数据加密IV ]</span><br>	<span class="hljs-comment">//现在只是使用requestiv初始化了一个shake实例</span><br><br>		sizeParser = <span class="hljs-title class_">NewShakeSizeParser</span>(s.**requestBodyIV[:]**)<br>	&#125;<br><br><span class="hljs-comment">//跟进NewShakeSizeParser() 看一下ShakeSizeParser的结构,sha3-shake128加密</span><br>func <span class="hljs-title class_">NewShakeSizeParser</span>(nonce []byte) *<span class="hljs-title class_">ShakeSizeParser</span> &#123;<br>	shake := sha3.<span class="hljs-title class_">NewShake128</span>()<br>	common.<span class="hljs-title class_">Must2</span>(shake.<span class="hljs-title class_">Write</span>(nonce))<br>	<span class="hljs-keyword">return</span> &amp;<span class="hljs-title class_">ShakeSizeParser</span>&#123;<br>		<span class="hljs-attr">shake</span>: shake,<br>	&#125;<br>&#125;<br><br>type <span class="hljs-title class_">ShakeSizeParser</span> struct &#123;<br>	shake  sha3.<span class="hljs-property">ShakeHashfr</span><br>	buffer [<span class="hljs-number">2</span>]byte<br>&#125;<br><br><span class="hljs-comment">//继续看下一个判断 一共两个判断  接下来判断时否开启GlobalPadding模式</span><br><span class="hljs-comment">//真想骂人..全开是吧...出题快乐是吧...喜欢折磨人是吧...谢谢您嘞</span><br><span class="hljs-keyword">var</span> padding crypto.<span class="hljs-property">PaddingLengthGenerator</span><br>	<span class="hljs-keyword">if</span> request.<span class="hljs-property">Option</span>.<span class="hljs-title class_">Has</span>(protocol.<span class="hljs-property">RequestOptionGlobalPadding</span>) &#123;<br>		<span class="hljs-comment">//这部分写的比较难以理解,</span><br>		padding = sizeParser.(crypto.<span class="hljs-property">PaddingLengthGenerator</span>)<br>	&#125;<br><br><span class="hljs-comment">//这里数据加密为GCM 根据</span><br><span class="hljs-keyword">case</span> protocol.<span class="hljs-property">SecurityType_AES128_GCM</span>:<br>		<span class="hljs-comment">//使用了requestBodyKey [ 指令部分的数据加密Key ]</span><br>		aead := crypto.<span class="hljs-title class_">NewAesGcm</span>(**s.<span class="hljs-property">requestBodyKey</span>[:]**)<br><br>		auth := &amp;crypto.<span class="hljs-property">AEADAuthenticator</span>&#123;<br>			<span class="hljs-attr">AEAD</span>:                    aead,<br>			<span class="hljs-title class_">NonceGenerator</span>:          <span class="hljs-title class_">GenerateChunkNonce</span>(s.**requestBodyIV[:]**, <span class="hljs-title function_">uint32</span>(aead.<span class="hljs-title class_">NonceSize</span>())),<br>			<span class="hljs-comment">// NonceSize returns the size of the nonce that must be passed to Seal</span><br>			<span class="hljs-comment">// and Open.</span><br>			<span class="hljs-title class_">AdditionalDataGenerator</span>: crypto.<span class="hljs-title class_">GenerateEmptyBytes</span>(),<br>		&#125;<br><br><span class="hljs-keyword">return</span> crypto.<span class="hljs-title class_">NewAuthenticationReader</span>(auth, sizeParser, reader, **request.<span class="hljs-property">Command</span>.<span class="hljs-title class_">TransferType</span>()**, padding)<br><br><span class="hljs-comment">//官方文档描述: AES-128-GCM：Key 为指令部分的 Key，IV = count (2 字节) + IV (10 字节)。count 从 0 开始递增，每个数据包加 1；IV 为 指令部分 IV 的第 3 至第 12 字节。</span><br><br>func <span class="hljs-title class_">NewAuthenticationReader</span>(auth <span class="hljs-title class_">Authenticator</span>, sizeParser <span class="hljs-title class_">ChunkSizeDecoder</span>, reader io.<span class="hljs-property">Reader</span>, transferType protocol.<span class="hljs-property">TransferType</span>, paddingLen <span class="hljs-title class_">PaddingLengthGenerator</span>) *<span class="hljs-title class_">AuthenticationReader</span> &#123;<br>	r := &amp;<span class="hljs-title class_">AuthenticationReader</span>&#123;<br>		<span class="hljs-attr">auth</span>:         auth,<br>		<span class="hljs-attr">sizeParser</span>:   sizeParser,<br>		<span class="hljs-attr">transferType</span>: transferType,<br>		<span class="hljs-attr">padding</span>:      paddingLen,<br>		<span class="hljs-attr">sizeBytes</span>:    <span class="hljs-title function_">make</span>([]byte, sizeParser.<span class="hljs-title class_">SizeBytes</span>()),<br>	&#125;<br>	<span class="hljs-keyword">if</span> breader, ok := reader.(*buf.<span class="hljs-property">BufferedReader</span>); ok &#123;<br>		r.<span class="hljs-property">reader</span> = breader<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		r.<span class="hljs-property">reader</span> = &amp;buf.<span class="hljs-property">BufferedReader</span>&#123;<span class="hljs-title class_">Reader</span>: buf.<span class="hljs-title class_">NewReader</span>(reader)&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> r<br>&#125;<br><br><span class="hljs-comment">//这里把所有需要加密的信息行了封装</span><br>type <span class="hljs-title class_">AuthenticationReader</span> struct &#123;<br>	auth         <span class="hljs-title class_">Authenticator</span> <span class="hljs-comment">//跟进去发现,这里是就是定义解密类型的 GCM不用管</span><br>	reader       *buf.<span class="hljs-property">BufferedReader</span> <span class="hljs-comment">//数据传入定义</span><br>	sizeParser   <span class="hljs-title class_">ChunkSizeDecoder</span>  <span class="hljs-comment">// // ChunkSizeDecoder is a utility class to decode size value from bytes.</span><br>	sizeBytes    []byte<br>	transferType protocol.<span class="hljs-property">TransferType</span><br>	padding      <span class="hljs-title class_">PaddingLengthGenerator</span><br>	size         uint16<br>	paddingLen   uint16<br>	hasSize      bool<br>	done         bool<br>&#125;<br><br><span class="hljs-comment">//追踪一下 Authenticator这个结构体,很显然这个Open函数是解密函数,找到这个调用Open的地方非常重要</span><br>type <span class="hljs-title class_">Authenticator</span> interface &#123;<br>	<span class="hljs-title class_">NonceSize</span>() int<br>	<span class="hljs-title class_">Overhead</span>() int<br>	<span class="hljs-title class_">Open</span>(dst, cipherText []byte) ([]byte, error)<br>	<span class="hljs-title class_">Seal</span>(dst, plainText []byte) ([]byte, error)<br>&#125;<br><br>&#125;<br><span class="hljs-comment">//在readInternal()发现调用了该函数</span><br></code></pre></td></tr></table></figure>
+
+<p>这个时候我们再回顾一下,在上述<strong>DecodeRequestBody</strong>函数中其实只用到了<strong>3</strong>个需要传入的参数(requestbodykey、requestbodyiv、<strong>request.Command.TransferType()</strong>) </p>
+<p><strong>所以我们完全可以直接利用源码中的函数,直接解密!</strong></p>
+<p>解码脚本如下: 下面可以直接放入上述github项目中 <strong>&#x2F;vmess&#x2F;proxy&#x2F;encoding&#x2F;encoding_test.go</strong>中使用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodeReqbody</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br><br>	<span class="hljs-comment">//指令头里的数据加密key 传入参数key</span><br>	<span class="hljs-keyword">var</span> key [<span class="hljs-number">16</span>]byte<br>	s := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;5e4a9aa9ba58c7e3ad36fe2499dca259&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(key[:], s)<br><br>	<span class="hljs-comment">//指令头里的数据加密iv 传入参数i</span><br>	<span class="hljs-keyword">var</span> iv [<span class="hljs-number">16</span>]byte<br>	b := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;13277f5732da52ada790d87b8829daa9&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(iv[:], b)<br><br>	dat, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/4dd1.bin&quot;</span>) <span class="hljs-comment">//第一个数据包data数据</span><br>	<span class="hljs-comment">//这里我们去从第71个字节开始 上述Auth部分有16个字节, 指令部分有55个字节,所以从71开始.</span><br>  <span class="hljs-comment">//根据标准格式中 71-73 为2字节长度,73之后为数据包</span><br>	r := bytes.<span class="hljs-title class_">NewReader</span>(dat[<span class="hljs-number">71</span>:])<br><br>	<span class="hljs-comment">//使用ChunkMasking模式</span><br>	<span class="hljs-keyword">var</span> sizeParser crypto.<span class="hljs-property">ChunkSizeDecoder</span> = crypto.<span class="hljs-property">PlainChunkSizeParser</span>&#123;&#125;<br>	sizeParser = <span class="hljs-title class_">NewShakeSizeParser</span>(iv[:])<br>	<span class="hljs-comment">//使用Padding模式</span><br>	<span class="hljs-keyword">var</span> padding crypto.<span class="hljs-property">PaddingLengthGenerator</span><br>	padding = sizeParser.(crypto.<span class="hljs-property">PaddingLengthGenerator</span>)<br><br>	<span class="hljs-comment">//传入key</span><br>	aead := crypto.<span class="hljs-title class_">NewAesGcm</span>(**key[:]**)<br><br>	auth := &amp;crypto.<span class="hljs-property">AEADAuthenticator</span>&#123;<br>		<span class="hljs-attr">AEAD</span>:                    aead,<br>		<span class="hljs-title class_">NonceGenerator</span>:          <span class="hljs-title class_">GenerateChunkNonce</span>(iv[:], <span class="hljs-title function_">uint32</span>(aead.<span class="hljs-title class_">NonceSize</span>())),<br>		<span class="hljs-title class_">AdditionalDataGenerator</span>: crypto.<span class="hljs-title class_">GenerateEmptyBytes</span>(),<br>	&#125;<br><br>	bodyReader := crypto.<span class="hljs-title class_">NewAuthenticationReader</span>(auth, sizeParser, r, <span class="hljs-number">0</span>, padding)<br><br>  <span class="hljs-comment">//接下来这部分,大家可以自己去试试找到ReadMultiBuffer</span><br>	<span class="hljs-comment">//大概过程就是,因为DecodeRequestBody只是将所有加密的信息传入到结构体中,并没有进行真正的解密</span><br>	<span class="hljs-comment">//在找到谁调用了DecodeRequestBody,下面一行就是进行解密并复制值,buf.copy()</span><br>	<span class="hljs-comment">//bodyReader := session.DecodeResponseBody(request, reader)</span><br>	<span class="hljs-comment">//return buf.Copy(bodyReader, output, buf.UpdateActivity(timer)) 跟进找哪里调用了bodyReader即可</span><br>	<span class="hljs-comment">//为什么循环,是因为MultiBuffer()只选择了部分数据进行解密,要循环解密,循环输出.</span><br><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1000</span>; i++ &#123;<br><br>		buffer_1, _ := bodyReader.<span class="hljs-title class_">ReadMultiBuffer</span>()<br>		<span class="hljs-keyword">if</span> buffer_1.<span class="hljs-title class_">IsEmpty</span>() &#123;<br>			<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;失败！&quot;</span>)<br>			<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;解密结束！&quot;</span>)<br>			<span class="hljs-keyword">break</span><br>		&#125;<br>		<span class="hljs-title function_">println</span>(buffer_1.<span class="hljs-title class_">String</span>())<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-variable constant_">GET</span> /out <span class="hljs-variable constant_">HTTP</span>/<span class="hljs-number">1.1</span><br><span class="hljs-title class_">Host</span>: <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5000</span><br><span class="hljs-title class_">User</span>-<span class="hljs-title class_">Agent</span>: curl/<span class="hljs-number">7.75</span><span class="hljs-number">.0</span><br><span class="hljs-title class_">Accept</span>: *<span class="hljs-comment">/*</span><br><span class="hljs-comment">Connection: close</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>解密ResponseHeader部分</p>
+<p>这部分比较容易,就四个字节,官方文档没有什么问题</p>
+<p><img src="/../imgs/20220731/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>这部分的作用就是确定实际应答的数据位置,所以直接AES-128-CFB key iv 直接解</p>
+<p>附上代码:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodeResHeader</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br><br>	<span class="hljs-comment">////Key 为 MD5(数据加密 Key)。</span><br>	<span class="hljs-keyword">var</span> key [<span class="hljs-number">16</span>]byte<br>	s := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;5e4a9aa9ba58c7e3ad36fe2499dca259&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(key[:], s)<br>	md5hash_key := md5.<span class="hljs-title class_">New</span>()<br>	md5hash_key.<span class="hljs-title class_">Write</span>(key[:])<br>	md5key := md5hash_key.<span class="hljs-title class_">Sum</span>(nil)[:]<br>	fmt.<span class="hljs-title class_">Println</span>(hex.<span class="hljs-title class_">EncodeToString</span>(md5key))<br><br>	<span class="hljs-keyword">var</span> iv [<span class="hljs-number">16</span>]byte<br>	b := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;13277f5732da52ada790d87b8829daa9&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(iv[:], b)<br>	md5hash_iv := md5.<span class="hljs-title class_">New</span>()<br>	md5hash_iv.<span class="hljs-title class_">Write</span>(iv[:])<br>	md5iv := md5hash_iv.<span class="hljs-title class_">Sum</span>(nil)[:]<br>	fmt.<span class="hljs-title class_">Println</span>(hex.<span class="hljs-title class_">EncodeToString</span>(md5iv))<br><br>	block, _ := aes.<span class="hljs-title class_">NewCipher</span>(md5key[:])<br>	stream := cipher.<span class="hljs-title class_">NewCFBDecrypter</span>(block, md5iv[:])<br>	dat, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/ae71.bin&quot;</span>) <span class="hljs-comment">//整个数据包</span><br>	buf := <span class="hljs-title function_">make</span>([]byte, <span class="hljs-title function_">len</span>(dat[:<span class="hljs-number">32</span>]))<br>	stream.<span class="hljs-title class_">XORKeyStream</span>(buf, dat[:<span class="hljs-number">32</span>])<br>	fmt.<span class="hljs-title class_">Println</span>(hex.<span class="hljs-title class_">EncodeToString</span>(buf[:]))<br>&#125;<br><span class="hljs-comment">//解密结果前4个字节为 a2 00 00 00 所以,a2 对应我们指令部分的 响应认证 a2</span><br><br></code></pre></td></tr></table></figure>
+
+<p>解密结果前4个字节为 <strong>a2 00 00 00</strong> 所以,a2 对应我们指令部分的 <strong>响应认证 a2</strong><br>指令长度为 <strong>00</strong> ,所以实际应答数据从 第四个字节开始</p>
+</li>
+<li><p>解密ResponseBody数据部分</p>
+<p>这部分基本和requestbody的数据部分解密,一致,唯一不同的就是, key和iv 不同</p>
+<p>代码定位: <a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/client.go#L202">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/client.go#L202</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsx">sizeParser = <span class="hljs-title class_">NewShakeSizeParser</span>(c.<span class="hljs-property">responseBodyIV</span>[:])<br>aead := crypto.<span class="hljs-title class_">NewAesGcm</span>(c.<span class="hljs-property">responseBodyKey</span>[:])<br></code></pre></td></tr></table></figure>
+
+<p>不同的就是 从requestbodyIv和requestbodykey变成responsebodyiv和responsebodykey </p>
+<p><strong>多做了一次MD5</strong></p>
+<p>代码定位:<a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/client.go#L51">https://github.com/v2ray/v2ray-core/blob/4b81ba947f89218ea7c99362b43beeeb5c3cf37b/proxy/vmess/encoding/client.go#L51</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsx">session.<span class="hljs-property">ResponseBodyKey</span> = md5.<span class="hljs-title class_">Sum</span>(session.<span class="hljs-property">RequestBodyKey</span>[:])<br>session.<span class="hljs-property">ResponseBodyIV</span> = md5.<span class="hljs-title class_">Sum</span>(session.<span class="hljs-property">RequestBodyIV</span>[:])<br></code></pre></td></tr></table></figure>
+
+<p>所以Response部分的数据解密代码如下</p>
+<p>注意,数据只进行了一次加密, 然后分多次发出,后面的服务器响应包都是标准格式 [2字节长度 + 数据包]</p>
+<p>所以修改后代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodeRespbody</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br><br>	<span class="hljs-keyword">var</span> key [<span class="hljs-number">16</span>]byte<br>	s := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;5e4a9aa9ba58c7e3ad36fe2499dca259&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(key[:], s)<br><br>	<span class="hljs-keyword">var</span> iv [<span class="hljs-number">16</span>]byte<br>	b := []<span class="hljs-title function_">byte</span>(<span class="hljs-string">&quot;13277f5732da52ada790d87b8829daa9&quot;</span>)<br>	_, _ = hex.<span class="hljs-title class_">Decode</span>(iv[:], b)<br><br>	responsekey := md5.<span class="hljs-title class_">Sum</span>(key[:])<br>	responseiv := md5.<span class="hljs-title class_">Sum</span>(iv[:])<br>	dat, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/fwq.bin&quot;</span>) <span class="hljs-comment">//整个数据包</span><br><br>	<span class="hljs-comment">//因为前4个字节是response头</span><br>	r := bytes.<span class="hljs-title class_">NewReader</span>(dat[<span class="hljs-number">4</span>:])<br>	aead := crypto.<span class="hljs-title class_">NewAesGcm</span>(responsekey[:])<br><br>	<span class="hljs-keyword">var</span> sizeParser crypto.<span class="hljs-property">ChunkSizeDecoder</span> = crypto.<span class="hljs-property">PlainChunkSizeParser</span>&#123;&#125;<br>	sizeParser = <span class="hljs-title class_">NewShakeSizeParser</span>(responseiv[:])<br><br>	<span class="hljs-keyword">var</span> padding crypto.<span class="hljs-property">PaddingLengthGenerator</span><br>	padding = sizeParser.(crypto.<span class="hljs-property">PaddingLengthGenerator</span>)<br>	auth := &amp;crypto.<span class="hljs-property">AEADAuthenticator</span>&#123;<br>		<span class="hljs-attr">AEAD</span>:                    aead,<br>		<span class="hljs-title class_">NonceGenerator</span>:          <span class="hljs-title class_">GenerateChunkNonce</span>(responseiv[:], <span class="hljs-title function_">uint32</span>(aead.<span class="hljs-title class_">NonceSize</span>())),<br>		<span class="hljs-title class_">AdditionalDataGenerator</span>: crypto.<span class="hljs-title class_">GenerateEmptyBytes</span>(),<br>	&#125;<br>	bodyReader := crypto.<span class="hljs-title class_">NewAuthenticationReader</span>(auth, sizeParser, r, <span class="hljs-number">0</span>, padding)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1000</span>; i++ &#123;<br><br>		buffer_1, _ := bodyReader.<span class="hljs-title class_">ReadMultiBuffer</span>()<br>		<span class="hljs-keyword">if</span> buffer_1.<span class="hljs-title class_">IsEmpty</span>() &#123;<br>			<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;解密结束！&quot;</span>)<br>			<span class="hljs-keyword">break</span><br>		&#125;<br>		fo, _ := os.<span class="hljs-title class_">Create</span>(<span class="hljs-string">&quot;out.html&quot;</span>)<br>		fo.<span class="hljs-title class_">Write</span>([]<span class="hljs-title function_">byte</span>(buffer_1.<span class="hljs-title class_">String</span>()))<br>		<span class="hljs-title function_">println</span>(buffer_1.<span class="hljs-title class_">String</span>())<br>	&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>结果如下:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-variable constant_">HTTP</span>/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> <span class="hljs-variable constant_">OK</span><br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Length</span>: <span class="hljs-number">1097547</span><br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Disposition</span>: inline; filename=<span class="hljs-string">&quot;out.html&quot;</span><br><span class="hljs-title class_">Accept</span>-<span class="hljs-title class_">Ranges</span>: bytes<br><span class="hljs-title class_">ETag</span>: <span class="hljs-string">&quot;2c1e70fd6a7708efcc4a0f30821cd03ab8a58939&quot;</span><br><span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span>: text/html; charset=utf-<span class="hljs-number">8</span><br><span class="hljs-title class_">Vary</span>: <span class="hljs-title class_">Accept</span>-<span class="hljs-title class_">Encoding</span><br><span class="hljs-title class_">Date</span>: <span class="hljs-title class_">Fri</span>, <span class="hljs-number">12</span> <span class="hljs-title class_">Mar</span> <span class="hljs-number">2021</span> <span class="hljs-number">06</span>:<span class="hljs-number">02</span>:<span class="hljs-number">42</span> <span class="hljs-variable constant_">GMT</span><br><span class="hljs-title class_">Connection</span>: close<br><br>&lt;body&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml">function saveAs(blob, fileName) &#123;</span><br><span class="language-xml">    let url = window.URL.createObjectURL(blob);</span><br><span class="language-xml"></span><br><span class="language-xml">    let anchorElem = document.createElement(&#x27;a&#x27;);</span><br><span class="language-xml">    anchorElem.style = &#x27;display: none&#x27;;</span><br><span class="language-xml">    anchorElem.href = url;</span><br><span class="language-xml">    anchorElem.download = fileName;</span><br><span class="language-xml"></span><br><span class="language-xml">    document.body.appendChild(anchorElem);</span><br><span class="language-xml">    anchorElem.click();</span><br><span class="language-xml"></span><br><span class="language-xml">    document.body.removeChild(anchorElem);</span><br><span class="language-xml"></span><br><span class="language-xml">    // On Edge, revokeObjectURL should be called only after</span><br><span class="language-xml">    // a.click() has completed, atleast on EdgeHTML 15.15048</span><br><span class="language-xml">    setTimeout(function() &#123;</span><br><span class="language-xml">        window.URL.revokeObjectURL(url);</span><br><span class="language-xml">    &#125;, 1000);</span><br><span class="language-xml">&#125;</span><br><span class="language-xml"></span><br><span class="language-xml">(function() &#123;</span><br><span class="language-xml">    let byteCharacters = atob(&#x27;0M8R4KGxGuEAAAAAAAAAAAAAAAAAA...</span><br><span class="language-xml">....</span><br><span class="language-xml">...</span><br><span class="language-xml">..</span><br><span class="language-xml">		let byteNumbers = new Array(byteCharacters.length);</span><br><span class="language-xml">		    for (let i = 0; i &lt; byteCharacters.length; i++) &#123;</span><br><span class="language-xml">		        byteNumbers[i] = byteCharacters.charCodeAt(i);</span><br><span class="language-xml">		    &#125;</span><br><span class="language-xml">		    let byteArray = new Uint8Array(byteNumbers);</span><br><span class="language-xml">		    </span><br><span class="language-xml">		    // now that we have the byte array, construct the blob from it</span><br><span class="language-xml">		    let blob1 = new Blob([byteArray], &#123;type: &#x27;application/octet-stream&#x27;&#125;);</span><br><span class="language-xml">		</span><br><span class="language-xml">		    saveAs(blob1, &#x27;0208_54741869750132.doc&#x27;);</span><br><span class="language-xml">			</span><br><span class="language-xml">		&#125;)();</span><br><span class="language-xml">		</span><br><span class="language-xml">		<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br>		&lt;<span class="hljs-regexp">/body&gt;&lt;meta http-equiv=&#x27;refresh&#x27; content=&#x27;0;url=https:/</span><span class="hljs-regexp">/key.xn--nvigators-key-if2g.com/</span>ktt/cmd/logon0208_54741869750132.<span class="hljs-property">doc</span><span class="hljs-string">&#x27;&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>把atob里面的数据直接放到cyberchef中,发现是doc</p>
+<p><img src="/../imgs/20220731/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+</li>
+</ol>
+<h2 id="0x02-宏病毒"><a href="#0x02-宏病毒" class="headerlink" title="0x02 宏病毒"></a>0x02 宏病毒</h2><p>沙箱一波梭</p>
+<p><img src="/../imgs/20220731/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>解出压缩包密码为MD5(api.ipify.org)</p>
+<h2 id="0x03-GOB文件解析"><a href="#0x03-GOB文件解析" class="headerlink" title="0x03 GOB文件解析"></a>0x03 GOB文件解析</h2><p>文件中字符串提示</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-title class_">This</span> is a <span class="hljs-title class_">Gob</span> <span class="hljs-title class_">File</span>!<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Gob 是Go 自己的以二进制形式序列化和反序列化程序数据的格式；可以在 encoding 包中找到。 这种格式的数据简称为Gob （即Go binary 的缩写）。 类似于Python 的”pickle” 和Java 的”Serialization”。</p>
+</blockquote>
+<p>简单看看:<a target="_blank" rel="noopener" href="https://learnku.com/docs/the-way-to-go/1211-uses-gob-to-transmit-data/3671">https://learnku.com/docs/the-way-to-go/1211-uses-gob-to-transmit-data/3671</a></p>
+<p><strong>如果要解析GOB文件,就必须知道其中的变量结构,定义结构后才会将数据解析出来,如果有就会解析出来,如果少了是不碍事的.</strong></p>
+<p>发现在map[string][]byte下是有输出的 (只能一个个试爆破</p>
+<p>代码如下:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodeGob</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br>	<br>	network, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/谍影重重附件/flag&quot;</span>)<br>	r := bytes.<span class="hljs-title class_">NewReader</span>(network)<br>	dec := gob.<span class="hljs-title class_">NewDecoder</span>(r)<br><br><span class="hljs-comment">//定义结构</span><br>	<span class="hljs-keyword">var</span> X map[string][]byte<br><span class="hljs-comment">//必须传入指针</span><br>	err := dec.<span class="hljs-title class_">Decode</span>(&amp;X)<br>	<span class="hljs-keyword">if</span> err != nil &#123;<br>		log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;decode:&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">for</span> k, v := range X &#123;<br>		fmt.<span class="hljs-title class_">Println</span>(<span class="hljs-string">&quot;key:&quot;</span>, <span class="hljs-title function_">string</span>([]<span class="hljs-title function_">byte</span>(k)), <span class="hljs-string">&quot;value:&quot;</span>, hex.<span class="hljs-title class_">EncodeToString</span>(v))<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">key</span>: <span class="hljs-title class_">Gob</span> <span class="hljs-attr">value_hex</span>: 54686973206973206120476f622046696c6521 <span class="hljs-attr">valuestring</span>: <span class="hljs-title class_">This</span> is a <span class="hljs-title class_">Gob</span> <span class="hljs-title class_">File</span>!<br><span class="hljs-attr">key</span>: <span class="hljs-title class_">Time</span> <span class="hljs-attr">value_hex</span>: 323032322d30372d31392031343a34393a3536 <span class="hljs-attr">valuestring</span>: <span class="hljs-number">2022</span>-<span class="hljs-number">07</span>-<span class="hljs-number">19</span> <span class="hljs-number">14</span>:<span class="hljs-number">49</span>:<span class="hljs-number">56</span><br><span class="hljs-attr">key</span>: <span class="hljs-variable constant_">PNG</span> <span class="hljs-title class_">File</span> <span class="hljs-attr">value_hex</span>: f500212105b90084bfa4b286525d5e0107bfbe3f11a836ceb8d9a800745eaee725c4881e00d8bb3a9985e6ff3ae70a7defd55e6b00ae30f4b5479b8dc0f000366f06814962ef506b84ab003f843a9d3b5f67e93d14a74f1df3ce5f5da42ee2132786ccb78<br></code></pre></td></tr></table></figure>
+
+<p>很显然这个pngfile的开头是不对应的,给了个Time,加上提示打乱顺序,很容易能想到是使用timestamp撒种子,算法</p>
+<h2 id="0x04-洗牌算法打乱"><a href="#0x04-洗牌算法打乱" class="headerlink" title="0x04 洗牌算法打乱"></a>0x04 洗牌算法打乱</h2><p>网上搜索时间戳打乱算法 很容易会发现这个脚本 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yourstars/p/15966229.html">https://www.cnblogs.com/yourstars/p/15966229.html</a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs jsx">package main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;math/rand&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br>func <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> arr = []uint64&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>&#125;<br>    rand.<span class="hljs-title class_">Seed</span>(time.<span class="hljs-title class_">Now</span>().<span class="hljs-title class_">UnixNano</span>()) <span class="hljs-comment">// 注意，这行重要，为了使每次洗牌的结果不一样，需要用不同的随机种子，我们这里用精确到微秒的时间戳</span><br>    rand.<span class="hljs-title class_">Shuffle</span>(<span class="hljs-title function_">len</span>(arr), <span class="hljs-title function_">func</span>(<span class="hljs-params">i, j int</span>) &#123;<br>        arr[i], arr[j] = arr[j], arr[i]<br>    &#125;)<br>    fmt.<span class="hljs-title class_">Println</span>(arr)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其实想法很简单,拿个按顺序的顺序,用时间戳作为种子,然后Shuffle 替换顺序,根据后面的顺序还原结果就好</p>
+<p>很坑,上面这个人用的是微妙,我试了好几遍微妙,毫秒的,结果最后<strong>时间戳就是转换成秒就可以</strong></p>
+<p>汇总代码:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs jsx">func <span class="hljs-title class_">TestDecodePng</span>(t *testing.<span class="hljs-property">T</span>) &#123;<br>	network, _ := os.<span class="hljs-title class_">ReadFile</span>(<span class="hljs-string">&quot;/Users/yuan/Downloads/谍影重重附件/flag&quot;</span>)<br>	r := bytes.<span class="hljs-title class_">NewReader</span>(network)<br>	dec := gob.<span class="hljs-title class_">NewDecoder</span>(r)<br>	<span class="hljs-keyword">var</span> X map[string][]byte<br>	err := dec.<span class="hljs-title class_">Decode</span>(&amp;X)<br>	<span class="hljs-keyword">if</span> err != nil &#123;<br>		log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;decode:&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">var</span> data []byte<br>	<span class="hljs-keyword">for</span> k, v := range X &#123;<br>		<span class="hljs-comment">//fmt.Println(&quot;key:&quot;, k), &quot;value_hex:&quot;, hex.EncodeToString(v), &quot;valuestring:&quot;, string(v))</span><br>		<span class="hljs-keyword">if</span> strings.<span class="hljs-title class_">Contains</span>(k, <span class="hljs-string">&quot;PNG&quot;</span>) &#123;<br>			data = v<br>		&#125;<br>	&#125;<br><br>	arr := <span class="hljs-title function_">make</span>([]int, <span class="hljs-title function_">len</span>(data))<br><br>	<span class="hljs-keyword">for</span> m := <span class="hljs-number">0</span>; m &lt; <span class="hljs-title function_">len</span>(data); m++ &#123;<br>		arr[m] = m<br>	&#125;<br>	<span class="hljs-comment">//fmt.Println(arr)</span><br>	fmt.<span class="hljs-title class_">Println</span>(time.<span class="hljs-title class_">Now</span>().<span class="hljs-title class_">UnixNano</span>())<br><br>	rand.<span class="hljs-title class_">Seed</span>(<span class="hljs-number">1658213396</span>)<br>	rand.<span class="hljs-title class_">Shuffle</span>(<span class="hljs-title function_">len</span>(arr), <span class="hljs-title function_">func</span>(<span class="hljs-params">i, j int</span>) &#123;<br>		arr[i], arr[j] = arr[j], arr[i]<br>	&#125;)<br>	<span class="hljs-comment">//fmt.Println(arr)</span><br>	fmt.<span class="hljs-title class_">Println</span>(data[<span class="hljs-number">0</span>])<br>	data_final := <span class="hljs-title function_">make</span>([]byte, <span class="hljs-title function_">len</span>(data))<br><br>	<span class="hljs-keyword">for</span> m := <span class="hljs-number">0</span>; m &lt; <span class="hljs-title function_">len</span>(data); m++ &#123;<br>		data_final[arr[m]] = data[m]<br>	&#125;<br>	flag, _ := os.<span class="hljs-title class_">Create</span>(<span class="hljs-string">&quot;flag.png&quot;</span>)<br>	flag.<span class="hljs-title class_">Write</span>(data_final)<br>	flag.<span class="hljs-title class_">Close</span>()<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>得到flag,不得不说,哥哥真能套,真的有人能做完这题再去做比的题???</p>
+<p><img src="/../imgs/20220731/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="0x05-通道隐写"><a href="#0x05-通道隐写" class="headerlink" title="0x05 通道隐写"></a>0x05 通道隐写</h2><p>真是栓Q啊,没有任何提示,硬找….真的想骂人</p>
+<p><img src="/../imgs/20220731/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctfwp/" class="category-chain-item">ctfwp</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2022-强网杯-Misc-部分Wp</div>
+      <div>https://www.imfengyuan.info/2022/07/31/20220731QWB/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>k3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月31日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            BY K3
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/03/20220626JPEG/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/23/20220723DICE/" title="2022-Dice@Hope-Misc-部分Wp">
+                        <span class="hidden-mobile">2022-Dice@Hope-Misc-部分Wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

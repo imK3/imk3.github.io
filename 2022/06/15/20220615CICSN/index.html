@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/maomao.png">
+  <link rel="icon" href="/img/maomao.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="k3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="2022-CICSN-国赛MiscWp目录 ez_usb  everlasting_night   ez_usb看到HID_DATA，提取键盘数据，发现有两个2.4 和2.8俩个键盘流量 提取发现 先提取json格式的数据 1tshark -T json -r ez_usb.pcapng &gt; test.json  分别提取流量 12345678910111213141516171819202">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022-CICSN-Misc-Wp">
+<meta property="og:url" content="https://www.imfengyuan.info/2022/06/15/20220615CICSN/index.html">
+<meta property="og:site_name" content="imK3">
+<meta property="og:description" content="2022-CICSN-国赛MiscWp目录 ez_usb  everlasting_night   ez_usb看到HID_DATA，提取键盘数据，发现有两个2.4 和2.8俩个键盘流量 提取发现 先提取json格式的数据 1tshark -T json -r ez_usb.pcapng &gt; test.json  分别提取流量 12345678910111213141516171819202">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220615CICSN/image_zb0ZDZSW3O.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220615CICSN/image_iz-BAeoDnl.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220615CICSN/image_8glQAxljNK.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220615CICSN/image_OpBxCDuk-s.png">
+<meta property="article:published_time" content="2022-06-15T11:19:23.000Z">
+<meta property="article:modified_time" content="2022-06-15T12:20:23.000Z">
+<meta property="article:author" content="imfengyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.imfengyuan.info/imgs/20220615CICSN/image_zb0ZDZSW3O.png">
+  
+  
+  <title>2022-CICSN-Misc-Wp - imK3</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.imfengyuan.info","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="imK3" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>K3&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/mao.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2022-CICSN-Misc-Wp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-15 11:19" pubdate>
+          2022年6月15日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2022-CICSN-Misc-Wp</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年6月15日 中午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="2022-CICSN-国赛MiscWp"><a href="#2022-CICSN-国赛MiscWp" class="headerlink" title="2022-CICSN-国赛MiscWp"></a>2022-CICSN-国赛MiscWp</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><p><a href="#ez_usb">ez_usb</a></p>
+</li>
+<li><p><a href="#everlasting_night">everlasting_night</a></p>
+</li>
+</ul>
+<h2 id="ez-usb"><a href="#ez-usb" class="headerlink" title="ez_usb"></a>ez_usb</h2><p>看到HID_DATA，提取键盘数据，发现有两个2.4 和2.8俩个键盘流量 提取发现</p>
+<p>先提取json格式的数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tshark -T json -r ez_usb.pcapng &gt; test.json<br></code></pre></td></tr></table></figure>
+
+<p>分别提取流量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> json<br><span class="hljs-comment"># Opening JSON file</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.json&#x27;</span>)<br><span class="hljs-comment"># returns JSON object as </span><br><span class="hljs-comment"># a dictionary</span><br>data = json.load(f)<br><span class="hljs-comment"># Iterating through the json</span><br><span class="hljs-comment"># list</span><br><span class="hljs-comment"># Closing file</span><br>f.close()<br>test_8 = []<br>test_10 = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(data)):<br>    <span class="hljs-keyword">if</span> data[i][<span class="hljs-string">&#x27;_source&#x27;</span>][<span class="hljs-string">&#x27;layers&#x27;</span>][<span class="hljs-string">&#x27;usb&#x27;</span>][<span class="hljs-string">&#x27;usb.src&#x27;</span>] == <span class="hljs-string">&#x27;2.8.1&#x27;</span>:<br>        hid = data[i][<span class="hljs-string">&#x27;_source&#x27;</span>][<span class="hljs-string">&#x27;layers&#x27;</span>][<span class="hljs-string">&#x27;usbhid.data&#x27;</span>]<br>        test_8.append(hid)<br>    <span class="hljs-keyword">if</span> data[i][<span class="hljs-string">&#x27;_source&#x27;</span>][<span class="hljs-string">&#x27;layers&#x27;</span>][<span class="hljs-string">&#x27;usb&#x27;</span>][<span class="hljs-string">&#x27;usb.src&#x27;</span>] == <span class="hljs-string">&#x27;2.10.1&#x27;</span>:<br>        hid = data[i][<span class="hljs-string">&#x27;_source&#x27;</span>][<span class="hljs-string">&#x27;layers&#x27;</span>][<span class="hljs-string">&#x27;usbhid.data&#x27;</span>]<br>        test_10.append(hid)<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test_8.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(<span class="hljs-string">&#x27;\n&#x27;</span>.join(test_8))<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test_10.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(<span class="hljs-string">&#x27;\n&#x27;</span>.join(test_10))<br></code></pre></td></tr></table></figure>
+
+<p>在用网上轮子提取分析</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding:utf-8 -*-</span><br><br>normalKeys = &#123;<span class="hljs-string">&quot;04&quot;</span>:<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;05&quot;</span>:<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;06&quot;</span>:<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;07&quot;</span>:<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;08&quot;</span>:<span class="hljs-string">&quot;e&quot;</span>, <span class="hljs-string">&quot;09&quot;</span>:<span class="hljs-string">&quot;f&quot;</span>, <span class="hljs-string">&quot;0a&quot;</span>:<span class="hljs-string">&quot;g&quot;</span>, <span class="hljs-string">&quot;0b&quot;</span>:<span class="hljs-string">&quot;h&quot;</span>, <span class="hljs-string">&quot;0c&quot;</span>:<span class="hljs-string">&quot;i&quot;</span>, <span class="hljs-string">&quot;0d&quot;</span>:<span class="hljs-string">&quot;j&quot;</span>, <span class="hljs-string">&quot;0e&quot;</span>:<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;0f&quot;</span>:<span class="hljs-string">&quot;l&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>:<span class="hljs-string">&quot;m&quot;</span>, <span class="hljs-string">&quot;11&quot;</span>:<span class="hljs-string">&quot;n&quot;</span>, <span class="hljs-string">&quot;12&quot;</span>:<span class="hljs-string">&quot;o&quot;</span>, <span class="hljs-string">&quot;13&quot;</span>:<span class="hljs-string">&quot;p&quot;</span>, <span class="hljs-string">&quot;14&quot;</span>:<span class="hljs-string">&quot;q&quot;</span>, <span class="hljs-string">&quot;15&quot;</span>:<span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-string">&quot;16&quot;</span>:<span class="hljs-string">&quot;s&quot;</span>, <span class="hljs-string">&quot;17&quot;</span>:<span class="hljs-string">&quot;t&quot;</span>, <span class="hljs-string">&quot;18&quot;</span>:<span class="hljs-string">&quot;u&quot;</span>, <span class="hljs-string">&quot;19&quot;</span>:<span class="hljs-string">&quot;v&quot;</span>, <span class="hljs-string">&quot;1a&quot;</span>:<span class="hljs-string">&quot;w&quot;</span>, <span class="hljs-string">&quot;1b&quot;</span>:<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;1c&quot;</span>:<span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&quot;1d&quot;</span>:<span class="hljs-string">&quot;z&quot;</span>,<span class="hljs-string">&quot;1e&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;1f&quot;</span>:<span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;20&quot;</span>:<span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;21&quot;</span>:<span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;22&quot;</span>:<span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;23&quot;</span>:<span class="hljs-string">&quot;6&quot;</span>,<span class="hljs-string">&quot;24&quot;</span>:<span class="hljs-string">&quot;7&quot;</span>,<span class="hljs-string">&quot;25&quot;</span>:<span class="hljs-string">&quot;8&quot;</span>,<span class="hljs-string">&quot;26&quot;</span>:<span class="hljs-string">&quot;9&quot;</span>,<span class="hljs-string">&quot;27&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;28&quot;</span>:<span class="hljs-string">&quot;&lt;RET&gt;&quot;</span>,<span class="hljs-string">&quot;29&quot;</span>:<span class="hljs-string">&quot;&lt;ESC&gt;&quot;</span>,<span class="hljs-string">&quot;2a&quot;</span>:<span class="hljs-string">&quot;&lt;DEL&gt;&quot;</span>, <span class="hljs-string">&quot;2b&quot;</span>:<span class="hljs-string">&quot;\t&quot;</span>,<span class="hljs-string">&quot;2c&quot;</span>:<span class="hljs-string">&quot;&lt;SPACE&gt;&quot;</span>,<span class="hljs-string">&quot;2d&quot;</span>:<span class="hljs-string">&quot;-&quot;</span>,<span class="hljs-string">&quot;2e&quot;</span>:<span class="hljs-string">&quot;=&quot;</span>,<span class="hljs-string">&quot;2f&quot;</span>:<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;30&quot;</span>:<span class="hljs-string">&quot;]&quot;</span>,<span class="hljs-string">&quot;31&quot;</span>:<span class="hljs-string">&quot;\\&quot;</span>,<span class="hljs-string">&quot;32&quot;</span>:<span class="hljs-string">&quot;&lt;NON&gt;&quot;</span>,<span class="hljs-string">&quot;33&quot;</span>:<span class="hljs-string">&quot;;&quot;</span>,<span class="hljs-string">&quot;34&quot;</span>:<span class="hljs-string">&quot;&#x27;&quot;</span>,<span class="hljs-string">&quot;35&quot;</span>:<span class="hljs-string">&quot;&lt;GA&gt;&quot;</span>,<span class="hljs-string">&quot;36&quot;</span>:<span class="hljs-string">&quot;,&quot;</span>,<span class="hljs-string">&quot;37&quot;</span>:<span class="hljs-string">&quot;.&quot;</span>,<span class="hljs-string">&quot;38&quot;</span>:<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-string">&quot;39&quot;</span>:<span class="hljs-string">&quot;&lt;CAP&gt;&quot;</span>,<span class="hljs-string">&quot;3a&quot;</span>:<span class="hljs-string">&quot;&lt;F1&gt;&quot;</span>,<span class="hljs-string">&quot;3b&quot;</span>:<span class="hljs-string">&quot;&lt;F2&gt;&quot;</span>, <span class="hljs-string">&quot;3c&quot;</span>:<span class="hljs-string">&quot;&lt;F3&gt;&quot;</span>,<span class="hljs-string">&quot;3d&quot;</span>:<span class="hljs-string">&quot;&lt;F4&gt;&quot;</span>,<span class="hljs-string">&quot;3e&quot;</span>:<span class="hljs-string">&quot;&lt;F5&gt;&quot;</span>,<span class="hljs-string">&quot;3f&quot;</span>:<span class="hljs-string">&quot;&lt;F6&gt;&quot;</span>,<span class="hljs-string">&quot;40&quot;</span>:<span class="hljs-string">&quot;&lt;F7&gt;&quot;</span>,<span class="hljs-string">&quot;41&quot;</span>:<span class="hljs-string">&quot;&lt;F8&gt;&quot;</span>,<span class="hljs-string">&quot;42&quot;</span>:<span class="hljs-string">&quot;&lt;F9&gt;&quot;</span>,<span class="hljs-string">&quot;43&quot;</span>:<span class="hljs-string">&quot;&lt;F10&gt;&quot;</span>,<span class="hljs-string">&quot;44&quot;</span>:<span class="hljs-string">&quot;&lt;F11&gt;&quot;</span>,<span class="hljs-string">&quot;45&quot;</span>:<span class="hljs-string">&quot;&lt;F12&gt;&quot;</span>&#125;<br>shiftKeys = &#123;<span class="hljs-string">&quot;04&quot;</span>:<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;05&quot;</span>:<span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;06&quot;</span>:<span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;07&quot;</span>:<span class="hljs-string">&quot;D&quot;</span>, <span class="hljs-string">&quot;08&quot;</span>:<span class="hljs-string">&quot;E&quot;</span>, <span class="hljs-string">&quot;09&quot;</span>:<span class="hljs-string">&quot;F&quot;</span>, <span class="hljs-string">&quot;0a&quot;</span>:<span class="hljs-string">&quot;G&quot;</span>, <span class="hljs-string">&quot;0b&quot;</span>:<span class="hljs-string">&quot;H&quot;</span>, <span class="hljs-string">&quot;0c&quot;</span>:<span class="hljs-string">&quot;I&quot;</span>, <span class="hljs-string">&quot;0d&quot;</span>:<span class="hljs-string">&quot;J&quot;</span>, <span class="hljs-string">&quot;0e&quot;</span>:<span class="hljs-string">&quot;K&quot;</span>, <span class="hljs-string">&quot;0f&quot;</span>:<span class="hljs-string">&quot;L&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>:<span class="hljs-string">&quot;M&quot;</span>, <span class="hljs-string">&quot;11&quot;</span>:<span class="hljs-string">&quot;N&quot;</span>, <span class="hljs-string">&quot;12&quot;</span>:<span class="hljs-string">&quot;O&quot;</span>, <span class="hljs-string">&quot;13&quot;</span>:<span class="hljs-string">&quot;P&quot;</span>, <span class="hljs-string">&quot;14&quot;</span>:<span class="hljs-string">&quot;Q&quot;</span>, <span class="hljs-string">&quot;15&quot;</span>:<span class="hljs-string">&quot;R&quot;</span>, <span class="hljs-string">&quot;16&quot;</span>:<span class="hljs-string">&quot;S&quot;</span>, <span class="hljs-string">&quot;17&quot;</span>:<span class="hljs-string">&quot;T&quot;</span>, <span class="hljs-string">&quot;18&quot;</span>:<span class="hljs-string">&quot;U&quot;</span>, <span class="hljs-string">&quot;19&quot;</span>:<span class="hljs-string">&quot;V&quot;</span>, <span class="hljs-string">&quot;1a&quot;</span>:<span class="hljs-string">&quot;W&quot;</span>, <span class="hljs-string">&quot;1b&quot;</span>:<span class="hljs-string">&quot;X&quot;</span>, <span class="hljs-string">&quot;1c&quot;</span>:<span class="hljs-string">&quot;Y&quot;</span>, <span class="hljs-string">&quot;1d&quot;</span>:<span class="hljs-string">&quot;Z&quot;</span>,<span class="hljs-string">&quot;1e&quot;</span>:<span class="hljs-string">&quot;!&quot;</span>, <span class="hljs-string">&quot;1f&quot;</span>:<span class="hljs-string">&quot;@&quot;</span>, <span class="hljs-string">&quot;20&quot;</span>:<span class="hljs-string">&quot;#&quot;</span>, <span class="hljs-string">&quot;21&quot;</span>:<span class="hljs-string">&quot;$&quot;</span>, <span class="hljs-string">&quot;22&quot;</span>:<span class="hljs-string">&quot;%&quot;</span>, <span class="hljs-string">&quot;23&quot;</span>:<span class="hljs-string">&quot;^&quot;</span>,<span class="hljs-string">&quot;24&quot;</span>:<span class="hljs-string">&quot;&amp;&quot;</span>,<span class="hljs-string">&quot;25&quot;</span>:<span class="hljs-string">&quot;*&quot;</span>,<span class="hljs-string">&quot;26&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;27&quot;</span>:<span class="hljs-string">&quot;)&quot;</span>,<span class="hljs-string">&quot;28&quot;</span>:<span class="hljs-string">&quot;&lt;RET&gt;&quot;</span>,<span class="hljs-string">&quot;29&quot;</span>:<span class="hljs-string">&quot;&lt;ESC&gt;&quot;</span>,<span class="hljs-string">&quot;2a&quot;</span>:<span class="hljs-string">&quot;&lt;DEL&gt;&quot;</span>, <span class="hljs-string">&quot;2b&quot;</span>:<span class="hljs-string">&quot;\t&quot;</span>,<span class="hljs-string">&quot;2c&quot;</span>:<span class="hljs-string">&quot;&lt;SPACE&gt;&quot;</span>,<span class="hljs-string">&quot;2d&quot;</span>:<span class="hljs-string">&quot;_&quot;</span>,<span class="hljs-string">&quot;2e&quot;</span>:<span class="hljs-string">&quot;+&quot;</span>,<span class="hljs-string">&quot;2f&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;30&quot;</span>:<span class="hljs-string">&quot;&#125;&quot;</span>,<span class="hljs-string">&quot;31&quot;</span>:<span class="hljs-string">&quot;|&quot;</span>,<span class="hljs-string">&quot;32&quot;</span>:<span class="hljs-string">&quot;&lt;NON&gt;&quot;</span>,<span class="hljs-string">&quot;33&quot;</span>:<span class="hljs-string">&quot;\&quot;&quot;</span>,<span class="hljs-string">&quot;34&quot;</span>:<span class="hljs-string">&quot;:&quot;</span>,<span class="hljs-string">&quot;35&quot;</span>:<span class="hljs-string">&quot;&lt;GA&gt;&quot;</span>,<span class="hljs-string">&quot;36&quot;</span>:<span class="hljs-string">&quot;&lt;&quot;</span>,<span class="hljs-string">&quot;37&quot;</span>:<span class="hljs-string">&quot;&gt;&quot;</span>,<span class="hljs-string">&quot;38&quot;</span>:<span class="hljs-string">&quot;?&quot;</span>,<span class="hljs-string">&quot;39&quot;</span>:<span class="hljs-string">&quot;&lt;CAP&gt;&quot;</span>,<span class="hljs-string">&quot;3a&quot;</span>:<span class="hljs-string">&quot;&lt;F1&gt;&quot;</span>,<span class="hljs-string">&quot;3b&quot;</span>:<span class="hljs-string">&quot;&lt;F2&gt;&quot;</span>, <span class="hljs-string">&quot;3c&quot;</span>:<span class="hljs-string">&quot;&lt;F3&gt;&quot;</span>,<span class="hljs-string">&quot;3d&quot;</span>:<span class="hljs-string">&quot;&lt;F4&gt;&quot;</span>,<span class="hljs-string">&quot;3e&quot;</span>:<span class="hljs-string">&quot;&lt;F5&gt;&quot;</span>,<span class="hljs-string">&quot;3f&quot;</span>:<span class="hljs-string">&quot;&lt;F6&gt;&quot;</span>,<span class="hljs-string">&quot;40&quot;</span>:<span class="hljs-string">&quot;&lt;F7&gt;&quot;</span>,<span class="hljs-string">&quot;41&quot;</span>:<span class="hljs-string">&quot;&lt;F8&gt;&quot;</span>,<span class="hljs-string">&quot;42&quot;</span>:<span class="hljs-string">&quot;&lt;F9&gt;&quot;</span>,<span class="hljs-string">&quot;43&quot;</span>:<span class="hljs-string">&quot;&lt;F10&gt;&quot;</span>,<span class="hljs-string">&quot;44&quot;</span>:<span class="hljs-string">&quot;&lt;F11&gt;&quot;</span>,<span class="hljs-string">&quot;45&quot;</span>:<span class="hljs-string">&quot;&lt;F12&gt;&quot;</span>&#125;<br>output = []<br>keys = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test_8.txt&#x27;</span>)<br><span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> keys:<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> line[<span class="hljs-number">0</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> (line[<span class="hljs-number">1</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">and</span> line[<span class="hljs-number">1</span>]!=<span class="hljs-string">&#x27;2&#x27;</span>) <span class="hljs-keyword">or</span> line[<span class="hljs-number">3</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">4</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">9</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">10</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">12</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">13</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">15</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">16</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">18</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">19</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">21</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">22</span>]!=<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">or</span> line[<span class="hljs-number">6</span>:<span class="hljs-number">8</span>]==<span class="hljs-string">&quot;00&quot;</span>:<br>             <span class="hljs-keyword">continue</span><br>        <span class="hljs-keyword">if</span> line[<span class="hljs-number">6</span>:<span class="hljs-number">8</span>] <span class="hljs-keyword">in</span> normalKeys.keys():<br>            output += [[normalKeys[line[<span class="hljs-number">6</span>:<span class="hljs-number">8</span>]]],[shiftKeys[line[<span class="hljs-number">6</span>:<span class="hljs-number">8</span>]]]][line[<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;2&#x27;</span>]<br>        <span class="hljs-keyword">else</span>:<br>            output += [<span class="hljs-string">&#x27;[unknown]&#x27;</span>]<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">pass</span><br>keys.close()<br><br>flag=<span class="hljs-number">0</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&quot;</span>.join(output))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(output)):<br>    <span class="hljs-keyword">try</span>:<br>        a=output.index(<span class="hljs-string">&#x27;&lt;DEL&gt;&#x27;</span>)<br>        <span class="hljs-keyword">del</span> output[a]<br>        <span class="hljs-keyword">del</span> output[a-<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(output)):<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> output[i]==<span class="hljs-string">&quot;&lt;CAP&gt;&quot;</span>:<br>            flag+=<span class="hljs-number">1</span><br>            output.pop(i)<br>            <span class="hljs-keyword">if</span> flag==<span class="hljs-number">2</span>:<br>                flag=<span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> flag!=<span class="hljs-number">0</span>:<br>            output[i]=output[i].upper()<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">pass</span><br><span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;output :&#x27;</span> + <span class="hljs-string">&quot;&quot;</span>.join(output))<br><br></code></pre></td></tr></table></figure>
+
+<p>发现一部分流量为十六进制的压缩包，另一串可以解开压缩包得到flag</p>
+<p><img src="/../imgs/20220615CICSN/image_zb0ZDZSW3O.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="everlasting-night"><a href="#everlasting-night" class="headerlink" title="everlasting_night"></a>everlasting_night</h2><p><img src="/../imgs/20220615CICSN/image_iz-BAeoDnl.png" srcset="/img/loading.gif" lazyload></p>
+<p>白嫖密码，一个lsb隐写提取zip 一个解开zip（当然后面也给了提示zsteg也能看到附加的十六进制的md5，cmd5解不出来，somd5可以。还有一个通道隐写。alpha通道），得到一个坏png头的</p>
+<p><img src="/../imgs/20220615CICSN/image_8glQAxljNK.png" srcset="/img/loading.gif" lazyload></p>
+<p>之前有一次比赛用过GIMP直接利用IDAT段得到数据</p>
+<p><img src="/../imgs/20220615CICSN/image_OpBxCDuk-s.png" srcset="/img/loading.gif" lazyload></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctfwp/" class="category-chain-item">ctfwp</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2022-CICSN-Misc-Wp</div>
+      <div>https://www.imfengyuan.info/2022/06/15/20220615CICSN/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>k3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月15日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            BY K3
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/25/20220619CICSNHDB/" title="2022-CICSN华东北-Web/Re/Misc-部分Wp">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2022-CICSN华东北-Web/Re/Misc-部分Wp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/12/20220612Pwnhub/" title="2022-PwnhubJune-Misc/Web-Wp">
+                        <span class="hidden-mobile">2022-PwnhubJune-Misc/Web-Wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

